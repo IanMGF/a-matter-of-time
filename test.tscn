@@ -1,0 +1,196 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1yyiykeq6dts"]
+
+[ext_resource type="PackedScene" uid="uid://bcquviiic51q0" path="res://models/breakable-wall.glb" id="1_6uqi0"]
+[ext_resource type="Script" uid="uid://lv6qdgu47c4c" path="res://mechanics/control/controller.gd" id="2_ppyta"]
+[ext_resource type="Script" uid="uid://6gdqu33x0xwb" path="res://mechanics/breakable_wall.gd" id="5_ykrsh"]
+
+[sub_resource type="GDScript" id="GDScript_6uqi0"]
+script/source = "extends Control
+
+
+@export var level: Node3D
+@onready var camera = %XRCamera3D
+
+@export var ray_length: float
+
+func _process(delta):
+	var viewport_size = get_viewport().size
+	var screen_center = viewport_size / 2
+	
+	var ray_origin = camera.project_ray_origin(screen_center)
+	var ray_direction = camera.project_ray_normal(screen_center)
+
+	var ray_end = ray_origin + ray_direction * ray_length
+	
+	var query = PhysicsRayQueryParameters3D.new()
+	query.collide_with_bodies = true
+	query.collide_with_areas = true
+	query.collision_mask = 2
+	query.from = ray_origin
+	query.to = ray_end
+
+	var space_state = level.get_world_3d().direct_space_state
+	var result = space_state.intersect_ray(query)
+	
+	if !result:
+		self.visible = false
+		return
+		
+	var collider: Object = result.collider
+	if !collider.is_in_group(\"Breakable\"):
+		self.visible = false
+		return
+	
+	self.visible = true
+"
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_mf4mk"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ppyta"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6uqi0"]
+size = Vector3(8.106628, 8.138092, 2.3053885)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ppyta"]
+size = Vector3(1.6420898, 1.6241455, 0.09120369)
+
+[node name="Level" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Prompt" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("level")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 213.0
+offset_bottom = 45.0
+script = SubResource("GDScript_6uqi0")
+level = NodePath("../..")
+ray_length = 2.5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Prompt"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 444.0
+offset_top = 276.0
+offset_right = 644.0
+offset_bottom = 303.0
+text = "Aperte X para quebrar"
+scroll_active = false
+
+[node name="Perspective" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Perspective"]
+camera_attributes = SubResource("CameraAttributesPhysical_mf4mk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Perspective"]
+transform = Transform3D(0.66761184, -0.46743357, 0.57948285, -0.7445096, -0.41915402, 0.51963013, 0, -0.7783417, -0.62784094, 2.1701202, 6.3403053, 8.695946)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Perspective"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.343375, 1.4880695, -1.2438183)
+
+[node name="Player" type="Node3D" parent="." node_paths=PackedStringArray("level", "prompt")]
+transform = Transform3D(-0.024698237, 0, -0.69956416, 0, 0.7, 0, 0.69956416, 0, -0.024698237, 0.023411036, 0.066764474, -1.924267)
+script = ExtResource("2_ppyta")
+level = NodePath("..")
+prompt = NodePath("../CanvasLayer/Prompt")
+interact_range = 2.5
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Player"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="XROrigin" type="XROrigin3D" parent="Player/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5278068, -0.005385399)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="Player/CharacterBody3D/XROrigin"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09688455, 0.3452655, 0.089524746)
+
+[node name="LeftHand" type="XRController3D" parent="Player/CharacterBody3D/XROrigin"]
+tracker = &"left_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CharacterBody3D/XROrigin/LeftHand"]
+transform = Transform3D(0.355, 0, 0, 0, 0.35, 0, 0, 0, 0.355, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_ppyta")
+
+[node name="HeadController" type="XRController3D" parent="Player/CharacterBody3D/XROrigin"]
+tracker = &"head"
+
+[node name="RightHand" type="XRController3D" parent="Player/CharacterBody3D/XROrigin"]
+tracker = &"right_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CharacterBody3D/XROrigin/RightHand"]
+transform = Transform3D(0.355, 0, 0, 0, 0.35, 0, 0, 0, 0.355, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0503294, 0.008631945)
+shape = SubResource("CapsuleShape3D_ppyta")
+
+[node name="Level Structure" type="Node3D" parent="."]
+
+[node name="Static Colliders" type="CSGCombiner3D" parent="Level Structure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+collision_layer = 3
+
+[node name="Wall" type="CSGBox3D" parent="Level Structure/Static Colliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.339, 1.25, -1.857)
+size = Vector3(0.415, 1.5, 4.261)
+
+[node name="Hole" type="CSGCylinder3D" parent="Level Structure/Static Colliders/Wall"]
+transform = Transform3D(-0.19161204, -0.89583504, 0, 1.8932879, -0.09066383, 0, 0, 0, 1.7858431, -0.53779423, -0.32813442, 0)
+operation = 2
+height = 3.1464844
+cone = true
+
+[node name="Wall2" type="CSGBox3D" parent="Level Structure/Static Colliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.875, 1.25, 0)
+size = Vector3(0.25, 1.5, 8)
+
+[node name="Wall3" type="CSGBox3D" parent="Level Structure/Static Colliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.875, 1.25, 0)
+size = Vector3(0.25, 1.5, 8)
+
+[node name="Wall4" type="CSGBox3D" parent="Level Structure/Static Colliders"]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0.020627486, 1.25, -3.874945)
+size = Vector3(0.25, 1.5, 8)
+
+[node name="Wall5" type="CSGBox3D" parent="Level Structure/Static Colliders"]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -0.020627486, 1.25, 3.874945)
+size = Vector3(0.25, 1.5, 8)
+
+[node name="Ground" type="CSGBox3D" parent="Level Structure/Static Colliders"]
+use_collision = true
+size = Vector3(8, 1, 8)
+
+[node name="Breakable Wall" type="Node3D" parent="Level Structure"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1761122, -0.10243523, -0.005857289)
+
+[node name="WallShape" type="StaticBody3D" parent="Level Structure/Breakable Wall"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.9155096, 0.76500297, 0.086952716)
+
+[node name="WallCollider" type="CollisionShape3D" parent="Level Structure/Breakable Wall/WallShape"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41097975, 0.25807595, -0.1667924)
+shape = SubResource("BoxShape3D_6uqi0")
+
+[node name="Model" parent="Level Structure/Breakable Wall/WallShape" instance=ExtResource("1_6uqi0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022159815, 0)
+
+[node name="BreakableDirection" type="Area3D" parent="Level Structure/Breakable Wall" groups=["Breakable"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("5_ykrsh")
+
+[node name="BreakableSide" type="CollisionShape3D" parent="Level Structure/Breakable Wall/BreakableDirection" groups=["Breakable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8449707, 0.8251343, -0.092387855)
+shape = SubResource("BoxShape3D_ppyta")
+
+[node name="UnbreakableDirection" type="Area3D" parent="Level Structure/Breakable Wall"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="UnbreakableSide" type="CollisionShape3D" parent="Level Structure/Breakable Wall/UnbreakableDirection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8449707, 0.8251343, 0.0004915297)
+shape = SubResource("BoxShape3D_ppyta")

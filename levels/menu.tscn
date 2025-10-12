@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://nslplirknef7"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_7fo35"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(511.5, 323.75)
+scale = Vector2(4.9960938, 648.5)
+texture = SubResource("CurveTexture_7fo35")
