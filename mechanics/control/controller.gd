@@ -40,7 +40,7 @@ func left_controller_button_pressed(_name: String) -> void:
 	var collider: Node3D = result.collider
 	if !collider.is_in_group("Breakable"):
 		return
-
+	
 	collider.get_parent().queue_free()
 
 
@@ -77,10 +77,11 @@ func _process(_delta):
 	if !result:
 		prompt.visible = false
 		return
-		
+	
 	var collider: Object = result.collider
 	if !collider.is_in_group("Breakable"):
 		prompt.visible = false
 		return
 	
 	prompt.visible = true
+	prompt.set_position(camera.unproject_position(result.collider.global_position), true)

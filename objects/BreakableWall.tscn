@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://drsvlmie7dumn"]
+
+[ext_resource type="PackedScene" uid="uid://bcquviiic51q0" path="res://models/breakable-wall.glb" id="1_5fid7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g46vh"]
+size = Vector3(8.106628, 8.138092, 2.3053885)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_csne4"]
+size = Vector3(1.6355343, 1.6423684, 0.15658998)
+
+[node name="BreakableWall" type="Node3D"]
+
+[node name="WallShape" type="StaticBody3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="WallCollider" type="CollisionShape3D" parent="WallShape"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41097975, 0.25807595, -0.1667924)
+shape = SubResource("BoxShape3D_g46vh")
+
+[node name="Model" parent="WallShape" instance=ExtResource("1_5fid7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.022159815, 0)
+
+[node name="BreakableDirection" type="Area3D" parent="." groups=["Breakable"]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="BreakableSide" type="CollisionShape3D" parent="BreakableDirection" groups=["Breakable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08319092, 0.06921005, -0.08531236)
+shape = SubResource("BoxShape3D_csne4")
+
+[node name="UnbreakableDirection" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="UnbreakableSide" type="CollisionShape3D" parent="UnbreakableDirection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0740881, 0.06158191, 0.03938079)
+shape = SubResource("BoxShape3D_csne4")
