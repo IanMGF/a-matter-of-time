@@ -10,14 +10,21 @@ config_version=5
 
 [application]
 
-config/name="BeyondTime"
+config/name="Questão de Tempo"
+config/version="ad0.0.10.16"
 run/main_scene="res://test.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://b4jsovil53xok"
 
 [autoload]
 
 XrSimulator="*res://addons/xr-simulator/XRSimulator.tscn"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/borderless=true
 
 [global_group]
 
@@ -63,7 +70,11 @@ ui_down={
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=1
 
 [xr]
 
+openxr/enabled=true
+openxr/extensions/hand_tracking=true
+openxr/extensions/hand_tracking_controller_data_source=true
 shaders/enabled=true

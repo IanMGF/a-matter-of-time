@@ -16,7 +16,9 @@ var controller_position: Vector2
 func input_controller_movement(_name: String, value: Vector2) -> void:
 	controller_position = value
 
-func left_controller_button_pressed(_name: String) -> void:
+func left_controller_button_pressed(btn_name: String) -> void:
+	if btn_name != "grip":
+		print("Button pressed:", btn_name)
 	var viewport_size = get_viewport().size
 	var screen_center = viewport_size / 2
 	

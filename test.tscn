@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1yyiykeq6dts"]
+[gd_scene load_steps=15 format=3 uid="uid://c1yyiykeq6dts"]
 
 [ext_resource type="Texture2D" uid="uid://cx2do2iltx5v0" path="res://imgs/Oculus_Trigger_Blank.png" id="1_6uqi0"]
+[ext_resource type="Script" uid="uid://2ubgm4orlyww" path="res://mechanics/control/xr_setup.gd" id="1_g14j6"]
 [ext_resource type="PackedScene" uid="uid://drsvlmie7dumn" path="res://objects/BreakableWall.tscn" id="2_8uh7m"]
 [ext_resource type="Script" uid="uid://lv6qdgu47c4c" path="res://mechanics/control/controller.gd" id="2_ppyta"]
+[ext_resource type="Script" uid="uid://doj3adb7rbv4v" path="res://mechanics/physics/gravity.gd" id="4_ppyta"]
+[ext_resource type="Script" uid="uid://ycwllden31ay" path="res://mechanics/physics/grab.gd" id="4_ykrsh"]
 
 [sub_resource type="FontVariation" id="FontVariation_6uqi0"]
 
@@ -13,9 +16,19 @@ texture_margin_left = 10.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ppyta"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ykrsh"]
+radius = 0.1821289
+height = 0.6621094
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppyta"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_6uqi0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ppyta"]
+size = Vector3(0.20605469, 0.19824219, 0.20214844)
+
 [node name="Level" type="Node3D"]
+script = ExtResource("1_g14j6")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -84,6 +97,11 @@ tracker = &"left_hand"
 transform = Transform3D(0.355, 0, 0, 0, 0.35, 0, 0, 0, 0.355, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_ppyta")
 
+[node name="Area3D" type="Area3D" parent="Player/CharacterBody3D/XROrigin/LeftHand"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody3D/XROrigin/LeftHand/Area3D"]
+shape = SubResource("CapsuleShape3D_ykrsh")
+
 [node name="HeadController" type="XRController3D" parent="Player/CharacterBody3D/XROrigin"]
 tracker = &"head"
 
@@ -93,6 +111,11 @@ tracker = &"right_hand"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CharacterBody3D/XROrigin/RightHand"]
 transform = Transform3D(0.355, 0, 0, 0, 0.35, 0, 0, 0, 0.355, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_ppyta")
+
+[node name="Area3D" type="Area3D" parent="Player/CharacterBody3D/XROrigin/RightHand"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody3D/XROrigin/RightHand/Area3D"]
+shape = SubResource("CapsuleShape3D_ykrsh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0503294, 0.008631945)
@@ -154,3 +177,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1834004, 0.6285484, 0.08378
 
 [node name="BreakableWall2" parent="Level Structure" instance=ExtResource("2_8uh7m")]
 transform = Transform3D(-1, 0, -4.894475e-08, 0, 1.0141565, 0, 8.742278e-08, 0, -0.5598626, -3.1140065, 0.6285484, 0.08378762)
+
+[node name="Grabbable" type="Node3D" parent="Level Structure" node_paths=PackedStringArray("left_controller", "right_controller")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1180916, 0.52621835, 0.6061485)
+script = ExtResource("4_ykrsh")
+left_controller = NodePath("../../Player/CharacterBody3D/XROrigin/LeftHand")
+right_controller = NodePath("../../Player/CharacterBody3D/XROrigin/RightHand")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level Structure/Grabbable"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("BoxMesh_6uqi0")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Level Structure/Grabbable"]
+script = ExtResource("4_ppyta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level Structure/Grabbable/RigidBody3D"]
+shape = SubResource("BoxShape3D_ppyta")
