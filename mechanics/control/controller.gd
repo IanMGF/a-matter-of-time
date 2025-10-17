@@ -54,40 +54,7 @@ func _physics_process(delta: float) -> void:
 	character_body.velocity.z = -unitary.y * delta * 35 * origin.world_scale
 
 func _process(_delta):
-	var viewport_size = get_viewport().size
-	var screen_center = viewport_size / 2
-	
-	var ray_origin = camera.project_ray_origin(screen_center)
-	var ray_direction = camera.project_ray_normal(screen_center)
-	var ray_end = ray_origin + ray_direction * interact_range
-	
-	interact_ray_query.collide_with_areas = true
-	interact_ray_query.collision_mask = 2
-	interact_ray_query.from = ray_origin
-	interact_ray_query.to = ray_end
-	
-	
-	var space_state = level.get_world_3d().direct_space_state
-	var result = space_state.intersect_ray(interact_ray_query)
-	
-	if !result:
-		prompt.visible = false
-		popup_xr.visible = false
-		return
-	
-	var collider: Object = result.collider
-	
-	popup_xr.global_position = (ray_origin + 2 * ray_end) / 3
-	popup_xr.rotation = camera.rotation
-	popup_xr.rotation.z = 0
-	
-	if !collider.is_in_group("Breakable"):
-		prompt.visible = false
-		popup_xr.visible = false
-		return
-	
-	prompt.visible = true
-	popup_xr.visible = true
+	pass
 
 func interact() -> void:
 	var viewport_size = get_viewport().size
@@ -103,6 +70,9 @@ func interact() -> void:
 	interact_ray_query.collision_mask = 2
 	interact_ray_query.from = ray_origin
 	interact_ray_query.to = ray_end
+	
+	popup_xr.global_position = (ray_origin + 2 * ray_end) / 3
+	popup_xr.rotation = camera.rotation
 	
 	var space_state = level.get_world_3d().direct_space_state
 	var result = space_state.intersect_ray(interact_ray_query)
