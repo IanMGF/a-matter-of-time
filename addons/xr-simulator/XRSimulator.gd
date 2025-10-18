@@ -243,7 +243,7 @@ func rotate_z_axis(event: InputEventMouseButton, controller: XRController3D):
 func rotate_device(event: InputEventMouseMotion, device: Node3D):
 	var motion = event.relative
 	device.rotate_y(motion.x * -device_x_sensitivity/1000)
-	device.rotate(device.transform.basis.x, motion.y * -device_y_sensitivity/1000)
+	device.rotate(device.transform.basis.x.normalized(), motion.y * -device_y_sensitivity/1000)
 	
 func vector_key_mapping(key_positive_x: int, key_negative_x: int, key_positive_y: int, key_negative_y: int):
 	var x = 0
