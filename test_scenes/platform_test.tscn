@@ -72,7 +72,7 @@ omni_range = 20.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2716426, 0, -1.1446836)
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="Test1"]
-transform = Transform3D(0.83324, -0.3591241, -0.42040607, 0.55291176, 0.54120123, 0.6335534, 0, -0.7603493, 0.64951444, -1.1923075, 1.3309793, -1.41693)
+transform = Transform3D(0.83324, -0.3591241, -0.42040607, 0.55291176, 0.54120123, 0.6335534, 0, -0.7603493, 0.64951444, -1.1923075, 3.5632029, -1.41693)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Test1/RigidBody3D2"]
 shape = SubResource("BoxShape3D_41uu4")
