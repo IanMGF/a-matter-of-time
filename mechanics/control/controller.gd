@@ -7,7 +7,6 @@ extends Node3D
 @onready var origin: XROrigin3D = $CharacterBody3D/XROrigin
 
 @export var popup_xr: OpenXRCompositionLayer
-@export var level: Node3D
 @export var prompt: Control
 @export var interact_range: float
 @export var layer_viewport: SubViewport
@@ -35,7 +34,7 @@ func _ready() -> void:
 	character_body.velocity = Vector3.ZERO
 	
 	var left_hand_mesh = $CharacterBody3D/XROrigin/LeftHand/MeshInstance3D
-	var right_hand_mesh = $CharacterBody3D/XROrigin/RightHand/MeshInstance3D
+	var right_hand_mesh = $CharacterBody3D/XROrigin/RightHand/GunRoot
 	
 	var hands_scale_scalar = origin.world_scale * 0.1
 	var hands_scale_vector = Vector3(hands_scale_scalar, hands_scale_scalar, hands_scale_scalar)
@@ -74,7 +73,7 @@ func interact() -> void:
 	popup_xr.global_position = (ray_origin + 2 * ray_end) / 3
 	popup_xr.rotation = camera.rotation
 	
-	var space_state = level.get_world_3d().direct_space_state
+	var space_state = get_tree().root.get_world_3d().direct_space_state
 	var result = space_state.intersect_ray(interact_ray_query)
 
 	if !result:
