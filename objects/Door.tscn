@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://c04j1g4ol567c"]
+
+[ext_resource type="Script" uid="uid://d3b2o2aowudt2" path="res://mechanics/physics/door.gd" id="1_ux33c"]
+[ext_resource type="PackedScene" uid="uid://cslrxq420hstb" path="res://models/door/frame.glb" id="2_x8twn"]
+[ext_resource type="PackedScene" uid="uid://byil3bvtfevpb" path="res://models/door/door.glb" id="3_ndqfo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ux33c"]
+size = Vector3(0.14941406, 1.6534424, 1.1484985)
+
+[node name="Door" type="Node3D"]
+script = ExtResource("1_ux33c")
+
+[node name="Frame" parent="." instance=ExtResource("2_x8twn")]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Frame"]
+visible = false
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Frame/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5, 0)
+radius = 1.2216797
+height = 0.24414063
+sides = 16
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Frame/CSGCombiner3D/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, -1.7763568e-15, 0)
+operation = 2
+size = Vector3(0.8, 0.404, 2.608)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Frame/CSGCombiner3D/CSGCylinder3D"]
+operation = 2
+radius = 0.99560547
+height = 0.34277344
+sides = 16
+
+[node name="door_a" parent="." instance=ExtResource("3_ndqfo")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="door_a"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door_a/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82889485, -0.5747986)
+shape = SubResource("BoxShape3D_ux33c")
+
+[node name="door_b" parent="." instance=ExtResource("3_ndqfo")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="door_b"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door_b/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.82889485, -0.5747986)
+shape = SubResource("BoxShape3D_ux33c")

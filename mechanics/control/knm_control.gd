@@ -16,10 +16,8 @@ func is_holding() -> bool:
 
 func get_movement_direction() -> Vector2:
 	var cam_rotation = get_camera().global_rotation.y
-	print(cam_rotation, "R")
-	var velocity = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var velocity = Input.get_vector("ui_left", "ui_right", "ui_forward", "ui_back")
 	var unitary = velocity.rotated(cam_rotation)
-	print(unitary)
 	return Vector2(unitary.x, -unitary.y)
 
 

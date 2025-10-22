@@ -27,9 +27,9 @@ func _process(_delta: float) -> void:
 	
 	var collider: Object = result.collider
 	
-	player.popup_xr.global_position = (ray_origin + 2 * ray_end) / 3
-	player.popup_xr.rotation = camera.rotation
-	player.popup_xr.rotation.z = 0
+	# player.popup_xr.global_position = (ray_origin + 2 * ray_end) / 3
+	# player.popup_xr.rotation = camera.rotation
+	# player.popup_xr.rotation.z = 0
 	
 	if !collider.is_in_group("Breakable"):
 		self.visible = false

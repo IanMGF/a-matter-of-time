@@ -7,7 +7,6 @@ extends PlayerControl
 
 @export var popup_xr: OpenXRCompositionLayer
 @export var prompt: Control
-@export var interact_range: float
 @export var layer_viewport: SubViewport
 
 @onready var interact_ray_query = PhysicsRayQueryParameters3D.new()
@@ -34,10 +33,10 @@ func left_controller_button_pressed(btn_name: String) -> void:
 		interact_ray_query.from = ray_origin
 		interact_ray_query.to = ray_end
 
-		popup_xr.global_position = (ray_origin + 2 * ray_end) / 3
-		popup_xr.rotation = camera.rotation
+		#popup_xr.global_position = (ray_origin + 2 * ray_end) / 3
+		#popup_xr.rotation = camera.rotation
 
-		var space_state = get_tree().get_world_3d().direct_space_state
+		var space_state = get_tree().root.get_world_3d().direct_space_state
 		var result = space_state.intersect_ray(interact_ray_query)
 
 		if !result:
