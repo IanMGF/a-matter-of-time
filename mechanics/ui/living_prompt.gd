@@ -18,7 +18,6 @@ func _process(_delta: float) -> void:
 	interact_ray_query.from = ray_origin
 	interact_ray_query.to = ray_end
 	
-	
 	var space_state = camera.get_world_3d().direct_space_state
 	var result = space_state.intersect_ray(interact_ray_query)
 	
