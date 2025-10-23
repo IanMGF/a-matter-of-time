@@ -27,22 +27,8 @@ func right_controller_button_pressed(_btn_name: String) -> void:
 	pass
 
 func _ready() -> void:
-<<<<<<< HEAD
 	pass
-=======
-	composition.layer_viewport = layer_viewport
-	xr_controller_left.input_vector2_changed.connect(input_controller_movement)
-	xr_controller_left.button_pressed.connect(left_controller_button_pressed)
-	xr_controller_right.button_pressed.connect(right_controller_button_pressed)
-	character_body.velocity = Vector3.ZERO
-	
-	var left_hand_mesh = $CharacterBody3D/XROrigin/LeftHand/MeshInstance3D
-	var right_hand_mesh = $CharacterBody3D/XROrigin/RightHand/GunRoot
-	
-	var hands_scale_scalar = origin.world_scale * 0.1
-	var hands_scale_vector = Vector3(hands_scale_scalar, hands_scale_scalar, hands_scale_scalar)
-	left_hand_mesh.scale = hands_scale_vector
-	right_hand_mesh.scale = hands_scale_vector
+
 
 func _physics_process(delta: float) -> void:
 	character_body.move_and_slide()
@@ -54,7 +40,6 @@ func _physics_process(delta: float) -> void:
 	var unitary = controller_position.rotated(cam_rotation)
 	character_body.velocity.x = unitary.x * delta * 35 * origin.world_scale
 	character_body.velocity.z = -unitary.y * delta * 35 * origin.world_scale
->>>>>>> main
 
 func _process(_delta):
 	pass
@@ -76,13 +61,8 @@ func interact() -> void:
 
 	popup_xr.global_position = (ray_origin + 2 * ray_end) / 3
 	popup_xr.rotation = camera.rotation
-<<<<<<< HEAD
 
-	var space_state = level.get_world_3d().direct_space_state
-=======
-	
 	var space_state = get_tree().root.get_world_3d().direct_space_state
->>>>>>> main
 	var result = space_state.intersect_ray(interact_ray_query)
 
 	if !result:
