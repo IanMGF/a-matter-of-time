@@ -4,6 +4,7 @@ extends PlayerControl
 @onready var xr_controller_right: XRController3D = $CharacterBody3D/XROrigin/RightHand
 @onready var camera: XRCamera3D = $CharacterBody3D/XROrigin/XRCamera3D
 @onready var origin: XROrigin3D = $CharacterBody3D/XROrigin
+@onready var hitbox: CollisionShape3D = $CharacterBody3D/CollisionShape3D
 
 @export var popup_xr: OpenXRCompositionLayer
 @export var prompt: Control
@@ -46,6 +47,20 @@ func left_controller_button_pressed(btn_name: String) -> void:
 
 		self.interact.emit(collider)
 
+func _process(delta: float) -> void:
+	var hitbox_2d_pos = Vector2(hitbox.global_position.x, hitbox.global_position.z)
+	var camera_2d_pos = Vector2(camera.global_position.x, camera.global_position.z)
+	
+	var distance = hitbox_2d_pos.distance_to(camera_2d_pos)
+	if distance < 0.2:
+		camera.set_cull_mask_value(1, true)
+		camera.set_perspective(75.0, 0.01, 4000)
+		return
+
+	camera.set_cull_mask_value(1, false)
+	camera.set_orthogonal(1440, 0.01, 4000)
+	camera.fov = 2.0
+
 func right_controller_button_pressed(_btn_name: String) -> void:
 	pass
 
@@ -83,4 +98,4 @@ func get_movement_direction() -> Vector2:
 	return Vector2(unitary.x, -unitary.y)
 
 func get_speed() -> float:
-	return 35 * origin.world_scale
+	return 15 * origin.world_scale
