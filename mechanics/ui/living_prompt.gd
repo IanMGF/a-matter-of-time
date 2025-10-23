@@ -4,7 +4,7 @@ extends Control
 @onready var interact_ray_query = PhysicsRayQueryParameters3D.new()
 
 func _process(_delta: float) -> void:
-	var camera = player.camera
+	var camera = player.get_camera()
 	
 	var viewport_size = get_viewport().size
 	var screen_center = viewport_size / 2
