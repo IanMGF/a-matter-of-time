@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://m2v1kfj2ueib"]
+[gd_scene load_steps=6 format=3 uid="uid://m2v1kfj2ueib"]
 
-[ext_resource type="Script" uid="uid://2tpob1ekbc14" path="res://mechanics/control/xr_control.gd" id="1_8ak8y"]
+[ext_resource type="Script" uid="uid://lv6qdgu47c4c" path="res://mechanics/control/controller.gd" id="1_8ak8y"]
+[ext_resource type="PackedScene" uid="uid://cyb6bbp5ijswv" path="res://models/gun.glb" id="2_gndvh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gndvh"]
 
@@ -10,8 +11,10 @@ height = 1.9335938
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f6j3j"]
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("popup_xr")]
 script = ExtResource("1_8ak8y")
+popup_xr = NodePath("CharacterBody3D/XROrigin/OpenXRCompositionLayerQuad")
+interact_range = 1.5
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -49,16 +52,20 @@ shape = SubResource("CapsuleShape3D_6vqvp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5126994, 0)
 tracker = &"right_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/XROrigin/RightHand"]
-transform = Transform3D(0.1, 0, 0, 0, 0.099, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_gndvh")
-
 [node name="Area3D" type="Area3D" parent="CharacterBody3D/XROrigin/RightHand"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/XROrigin/RightHand/Area3D"]
 transform = Transform3D(0.99999803, 0, -4.8428774e-08, 0, 0.9999995, 0, 4.8428774e-08, 0, 0.99999803, 0, 0, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_6vqvp")
+
+[node name="GunRoot" type="Node3D" parent="CharacterBody3D/XROrigin/RightHand"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Gun" parent="CharacterBody3D/XROrigin/RightHand/GunRoot" instance=ExtResource("2_gndvh")]
+transform = Transform3D(-1.6173216e-07, 0, 3.7, 0, 3.7, 0, -3.7, 0, -1.6173216e-07, 0, -0.3589325, 1.0829993)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62489116, 0)

@@ -72,7 +72,7 @@ func _ready() -> void:
 	character_body.velocity = Vector3.ZERO
 
 	var left_hand_mesh = $CharacterBody3D/XROrigin/LeftHand/MeshInstance3D
-	var right_hand_mesh = $CharacterBody3D/XROrigin/RightHand/MeshInstance3D
+	var right_hand_mesh = $CharacterBody3D/XROrigin/RightHand/GunRoot
 
 	var hands_scale_scalar = origin.world_scale * 0.1
 	var hands_scale_vector = Vector3(hands_scale_scalar, hands_scale_scalar, hands_scale_scalar)
