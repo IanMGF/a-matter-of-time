@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://dejcckcindmi"]
+
+[ext_resource type="PackedScene" uid="uid://4yvqmfa678g2" path="res://models/time_machine/machine.glb" id="1_k1ayg"]
+[ext_resource type="PackedScene" uid="uid://cixt7s454eehi" path="res://models/time_machine/lever.glb" id="2_pgpey"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k1ayg"]
+height = 0.15226483
+radius = 0.022460938
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtssq"]
+size = Vector3(1.506424, 0.08230591, 1.4723206)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rneiw"]
+size = Vector3(0.055633545, 3.0016785, 1.5080261)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6m40"]
+size = Vector3(1.4334717, 2.9932861, 0.6178589)
+
+[node name="TimeMachine" type="Node3D"]
+transform = Transform3D(0.685, 0, 0, 0, 0.685, 0, 0, 0, 0.685, 0, 0, 0)
+
+[node name="machine" parent="." instance=ExtResource("1_k1ayg")]
+
+[node name="lever" parent="." instance=ExtResource("2_pgpey")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41485336, 1.1338301, 0.53546447)
+
+[node name="Area3D" type="Area3D" parent="lever"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lever/Area3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.009020686, 0.3837942, -0.058448195)
+shape = SubResource("CylinderShape3D_k1ayg")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="Ceiling" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0026913881, 2.9626539, -0.01361084)
+shape = SubResource("BoxShape3D_jtssq")
+
+[node name="WallA" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7258022, 1.5092468, 0.0017242432)
+shape = SubResource("BoxShape3D_rneiw")
+
+[node name="WallB" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7205676, 1.5046234, 0.0017242432)
+shape = SubResource("BoxShape3D_rneiw")
+
+[node name="WallC" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0018920898, 1.5064783, 0.44978416)
+shape = SubResource("BoxShape3D_o6m40")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1.459854, 0, 0, 0, 1.459854, 0, 0, 0, 1.459854, 0, 2.8673284, 0)
+light_color = Color(0.8360248, 0.14474955, 0, 1)
+light_energy = 0.081
+light_indirect_energy = 0.671
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_begin = 2.0
+distance_fade_shadow = 0.0
+omni_range = 10.0
+omni_attenuation = 1.881
