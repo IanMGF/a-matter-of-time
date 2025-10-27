@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://m2v1kfj2ueib"]
 
-[ext_resource type="Script" uid="uid://lv6qdgu47c4c" path="res://mechanics/control/controller.gd" id="1_8ak8y"]
+[ext_resource type="Script" uid="uid://b2lmvupr045pn" path="res://mechanics/control/knm_control.gd" id="1_gndvh"]
 [ext_resource type="PackedScene" uid="uid://cyb6bbp5ijswv" path="res://models/gun.glb" id="2_gndvh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gndvh"]
@@ -11,9 +11,8 @@ height = 1.9335938
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f6j3j"]
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("popup_xr")]
-script = ExtResource("1_8ak8y")
-popup_xr = NodePath("CharacterBody3D/XROrigin/OpenXRCompositionLayerQuad")
+[node name="Player" type="Node3D"]
+script = ExtResource("1_gndvh")
 interact_range = 1.5
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
