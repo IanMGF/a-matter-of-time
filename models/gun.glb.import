@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://fongj2owo77b"
-path="res://.godot/imported/phrase-platform.glb-3d7658dbeafc12f9dab66d374ab2f37d.scn"
+uid="uid://cyb6bbp5ijswv"
+path="res://.godot/imported/gun.glb-05f42a236277268338275ecffb48440f.scn"
 
 [deps]
 
-source_file="res://models/phrase-platform.glb"
-dest_files=["res://.godot/imported/phrase-platform.glb-3d7658dbeafc12f9dab66d374ab2f37d.scn"]
+source_file="res://models/gun.glb"
+dest_files=["res://.godot/imported/gun.glb-05f42a236277268338275ecffb48440f.scn"]
 
 [params]
 
