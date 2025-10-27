@@ -55,17 +55,18 @@ mesh = SubResource("PlaneMesh_q3ji8")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="StaticLevelStructure"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="StaticLevelStructure/CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1646183, 5.0960693, -0.007095337)
-size = Vector3(0.19433594, 11.192139, 20.471283)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1721866, 5.0960693, -0.007095337)
+size = Vector3(0.31884766, 11.192139, 20.471283)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="StaticLevelStructure/CSGCombiner3D/CSGBox3D"]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 2.3531155e-09, -4.680167, 0)
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0, -4.65, 0)
 operation = 2
-radius = 1.1601563
+radius = 1.0864258
+height = 0.60876465
 sides = 12
 
 [node name="Door" parent="." instance=ExtResource("2_71juv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.168, -0.028, 0)
+transform = Transform3D(-2.917592e-08, 0, 1, 0, 0.66746724, 0, -0.66746724, 0, -4.371139e-08, 1.168, -0.028, 0)
 
 [node name="Player" parent="." instance=ExtResource("3_317fw")]
 transform = Transform3D(-0.1398298, 0, -0.99017555, 0, 1, 0, 0.99017555, 0, -0.1398298, -1.3905864, 0.0033843666, -0.19787359)
