@@ -1,0 +1,129 @@
+[gd_scene load_steps=6 format=3 uid="uid://deu4x5t36jama"]
+
+[ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player/Player.tscn" id="1_ds8y3"]
+[ext_resource type="PackedScene" uid="uid://cloobna8uaexa" path="res://objects/WordCube/WordCube.tscn" id="2_m1y2u"]
+[ext_resource type="PackedScene" uid="uid://dw7rq86een1iu" path="res://objects/Platform/Platform.tscn" id="3_vh2tg"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8w05j"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7gbxk"]
+
+[node name="PlatformTest" type="Node3D"]
+
+[node name="StaticLevelStructure" type="StaticBody3D" parent="."]
+
+[node name="Floor" type="CollisionShape3D" parent="StaticLevelStructure"]
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Floor"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Wall1" type="CollisionShape3D" parent="StaticLevelStructure"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -10)
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Wall1"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Wall2" type="CollisionShape3D" parent="StaticLevelStructure"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 10, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Wall2"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Wall3" type="CollisionShape3D" parent="StaticLevelStructure"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 10)
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Wall3"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Wall4" type="CollisionShape3D" parent="StaticLevelStructure"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -10, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Wall4"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Player" parent="." instance=ExtResource("1_ds8y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3905864, 0.0033843666, 2.905809)
+
+[node name="Illumination" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Illumination"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Illumination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.121748, 0)
+omni_range = 20.0
+
+[node name="Test1" type="Node3D" parent="."]
+
+[node name="WordCube" parent="Test1" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.5335407, -0.66856426, -0.5180311, 0.8457743, 0.42175102, 0.32679006, 0, -0.6124932, 0.7904757, -0.823563, 1.5871124, -1.2197316)
+
+[node name="Platform" parent="Test1" instance=ExtResource("3_vh2tg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7353413, 0, -1.2216153)
+
+[node name="Test2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1216855, 0, 0)
+
+[node name="WordCube" parent="Test2" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(-0.039150257, -0.54248786, 0.839151, -0.9109403, 0.36452517, 0.19315581, -0.4106764, -0.7568545, -0.50844526, -1.3183941, 1.2531952, -1.1741894)
+
+[node name="Platform" parent="Test2" instance=ExtResource("3_vh2tg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3004123, 0, -1.2099321)
+
+[node name="Test3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.415473, 0, 0)
+
+[node name="WordCube2" parent="Test3" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.44383776, -0.5207159, -0.72928935, -0.89610714, -0.2579082, -0.36121368, 0, 0.8138417, -0.58108664, -2.0681624, 2.500197, -0.7537558)
+
+[node name="Platform" parent="Test3" instance=ExtResource("3_vh2tg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1112442, 0, -1.1969233)
+
+[node name="Test4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5206614, 0, 0)
+
+[node name="WordCube" parent="Test4" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.859085, -0.44829437, -0.24699219, 0.51183295, 0.7524388, 0.41456357, 0, -0.48256406, 0.8758607, 0.06885052, 1.8862358, -1.0935925)
+
+[node name="Platform" parent="Test4" instance=ExtResource("3_vh2tg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27861023, 0, -1.184836)
+
+[node name="ExtraBlocks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3312898, 0, 0.3868494)
+
+[node name="WordCube" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.5335407, -0.66856426, -0.5180311, 0.8457743, 0.42175102, 0.32679006, 0, -0.6124932, 0.7904757, 0.32528436, 4.5036535, -1.2230756)
+
+[node name="WordCube2" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(-0.039150257, -0.54248786, 0.839151, -0.9109403, 0.36452517, 0.19315581, -0.4106764, -0.7568545, -0.50844526, -0.16954672, 3.2833295, -1.1775335)
+
+[node name="WordCube3" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.44383776, -0.5207159, -0.72928935, -0.89610714, -0.2579082, -0.36121368, 0, 0.8138417, -0.58108664, -3.431537, 5.4167376, -0.75709987)
+
+[node name="WordCube4" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.15573895, 0.027256012, -0.98742205, 0.9150335, -0.3805342, 0.13381758, -0.37210044, -0.9243651, -0.08420424, 2.0641797, 8.264233, -0.94422793)
+
+[node name="WordCube5" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.46831828, 0.22528344, 0.8543569, -0.7641451, -0.38217074, 0.51964206, 0.4435767, -0.89621055, -0.006828159, 1.9616632, 7.1445584, -0.25724733)
+
+[node name="WordCube6" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.41664124, -0.902665, 0.10773106, -0.29004338, -0.24430779, -0.92530453, 0.86155945, 0.35427335, -0.36360076, 0.81145513, 8.184179, -1.956234)
+
+[node name="WordCube7" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(0.39972964, 0.8999225, -0.1742286, 0.9150335, -0.38053423, 0.1338176, 0.054125577, -0.21291602, -0.97557, -1.2503232, 8.264233, -0.5881747)
+
+[node name="WordCube8" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(-0.30725256, 0.9239805, 0.22771941, -0.76414496, -0.3821707, 0.519642, 0.5671668, -0.014349282, 0.8234781, -1.9404286, 7.1445584, -0.5093942)
+
+[node name="WordCube9" parent="ExtraBlocks" instance=ExtResource("2_m1y2u")]
+transform = Transform3D(-0.7243678, -0.57582873, 0.3790942, -0.29004338, -0.24430779, -0.92530453, 0.6254325, -0.7802147, 0.009953402, -0.5970293, 8.184179, -2.0601401)
