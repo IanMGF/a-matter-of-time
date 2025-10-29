@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://daca12k2nffnn" path="res://objects/Player/popup_handler.gd" id="3_3voyg"]
 [ext_resource type="PackedScene" uid="uid://bxvqmbfkw5sxr" path="res://models/gun/gun.glb" id="3_6vqvp"]
 [ext_resource type="Texture2D" uid="uid://coslop22ns88a" path="res://imgs/Xbox Series/XboxSeriesX_X.png" id="4_jp6ib"]
+[ext_resource type="Script" uid="uid://bculktcby0jhc" path="res://mechanics/control/grab_ray_cast_controller.gd" id="3_f6j3j"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gndvh"]
 
@@ -80,3 +81,12 @@ pixel_size = 0.005
 billboard = 1
 no_depth_test = true
 texture = ExtResource("4_jp6ib")
+
+[node name="GrabRayCastController" type="Node" parent="." node_paths=PackedStringArray("ray_cast")]
+script = ExtResource("3_f6j3j")
+ray_cast = NodePath("RayCast3D")
+
+[node name="RayCast3D" type="RayCast3D" parent="GrabRayCastController"]
+transform = Transform3D(-4.3711374e-08, -1, -4.371139e-08, 1, -4.371139e-08, 4.371139e-08, -4.3711402e-08, -4.371139e-08, 1, 0.48443466, 0.3846984, -0.007123926)
+target_position = Vector3(0, -2, 0)
+collision_mask = 32
