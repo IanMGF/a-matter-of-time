@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://b0chvnwqypc5w"]
 
 [ext_resource type="PackedScene" uid="uid://dejcckcindmi" path="res://objects/TimeMachine.tscn" id="1_61w3m"]
-[ext_resource type="PackedScene" uid="uid://c04j1g4ol567c" path="res://objects/Door.tscn" id="1_b3oru"]
-[ext_resource type="PackedScene" uid="uid://bd8nhihypihy" path="res://objects/Button.tscn" id="2_ua5ty"]
-[ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player.tscn" id="3_61w3m"]
-[ext_resource type="PackedScene" uid="uid://dyitnhqobxy0o" path="res://objects/Hourglass.tscn" id="4_ua5ty"]
+[ext_resource type="PackedScene" uid="uid://c04j1g4ol567c" path="res://objects/Door/Door.tscn" id="1_b3oru"]
+[ext_resource type="PackedScene" uid="uid://bd8nhihypihy" path="res://objects/Button/Button.tscn" id="2_ua5ty"]
+[ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player/Player.tscn" id="3_61w3m"]
+[ext_resource type="PackedScene" uid="uid://dyitnhqobxy0o" path="res://objects/Hourglass/Hourglass.tscn" id="4_ua5ty"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pdpul"]
 
@@ -16,29 +16,30 @@
 use_collision = true
 
 [node name="FloorA" type="CSGBox3D" parent="Strucutre"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-size = Vector3(15, 1, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45288086, -0.5, 0)
+size = Vector3(14.15, 1, 10)
 
 [node name="FloorB" type="CSGBox3D" parent="Strucutre"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.5, 0)
-size = Vector3(3, 1, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.546509, -0.5, 0)
+size = Vector3(3.9069824, 1, 6)
 
 [node name="WallA" type="CSGBox3D" parent="Strucutre"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4.5)
-size = Vector3(15, 3, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4385376, 1.5, 4.5)
+size = Vector3(14.122925, 3, 1)
 
 [node name="WallB" type="CSGBox3D" parent="Strucutre"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -4.5)
-size = Vector3(15, 3, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45269775, 1.5, -4.5)
+size = Vector3(14.0946045, 3, 1)
 
 [node name="WallC" type="CSGBox3D" parent="Strucutre"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.506874, 1.5, 0)
 size = Vector3(0.23268127, 3, 10)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Strucutre/WallC"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.037257, 0.025451034)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.0100572, 0.025451034)
 operation = 2
-radius = 1.1044922
+radius = 1.0380859
+height = 0.24609375
 sides = 16
 
 [node name="WallD" type="CSGBox3D" parent="Strucutre"]
@@ -74,6 +75,7 @@ mesh = SubResource("BoxMesh_8hd6v")
 
 [node name="Player" parent="." instance=ExtResource("3_61w3m")]
 transform = Transform3D(-0.2622397, 0, -0.9650028, 0, 1, 0, 0.9650028, 0, -0.2622397, -2.8698957, 0, -2.1167483)
+interact_range = 1.5
 
 [node name="Perspective" type="Node3D" parent="."]
 

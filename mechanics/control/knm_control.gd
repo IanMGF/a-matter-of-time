@@ -3,6 +3,9 @@ extends PlayerControl
 @onready var camera: Camera3D = $CharacterBody3D/XROrigin/XRCamera3D
 
 const SENSITIVITY = 0.001
+const VIEW_EPSILON = 0
+
+const MAX_PITCH = PI/2 - VIEW_EPSILON
 
 func _ready() -> void:
 	$CharacterBody3D/XROrigin/LeftHand.queue_free()
@@ -29,10 +32,10 @@ func get_movement_direction() -> Vector2:
 
 
 func get_speed() -> float:
-	return 35
+	return 70
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var delta = event.relative
 		camera.global_rotation.y -= delta.x * SENSITIVITY
-		camera.global_rotation.x -= delta.y * SENSITIVITY
+		camera.global_rotation.x = clamp(camera.global_rotation.x - delta.y * SENSITIVITY, -MAX_PITCH, MAX_PITCH)

@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://nslplirknef7"]
+
+[ext_resource type="Script" uid="uid://dk4fl81ocnxtm" path="res://levels/Menu/menu.gd" id="1_kfby2"]
+
+[sub_resource type="Theme" id="Theme_k3j64"]
+
+[sub_resource type="Gradient" id="Gradient_3opdx"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3n0yn"]
+gradient = SubResource("Gradient_3opdx")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Theme" id="Theme_0mwec"]
+default_base_scale = 0.75
+default_font_size = 128
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = SubResource("Theme_k3j64")
+script = ExtResource("1_kfby2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960.5001, 534)
+scale = Vector2(31.015625, 18.000002)
+texture = SubResource("GradientTexture2D_3n0yn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 259.0
+offset_right = 1618.0
+offset_bottom = 465.0
+theme = SubResource("Theme_0mwec")
+text = "Questão de Tempo
+"
+scroll_following_visible_characters = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 602.0
+offset_right = 1044.0
+offset_bottom = 698.0
+theme_override_font_sizes/font_size = 64
+text = "Iniciar"
