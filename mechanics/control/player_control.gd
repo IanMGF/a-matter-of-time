@@ -11,6 +11,7 @@ signal rotate_obj(angle: float)
 signal rotate_head(rotation: Vector3)
 signal interact(target: Node3D)
 signal grab(target: Node3D)
+signal release()
 
 func _physics_process(delta: float) -> void:
 	character_body.move_and_slide()
@@ -35,3 +36,28 @@ func get_movement_direction() -> Vector2
 
 @abstract
 func get_speed() -> float
+
+func instatiate_grab_ray_Cast() -> void:
+	var ray_origin = self.get_gun_origin()
+	var ray_direction = self.get_gun_facing()
+	var ray_end = ray_origin + ray_direction * self.interact_range
+	
+	var raycast = PhysicsRayQueryParameters3D.new()
+	raycast.from = ray_origin
+	raycast.to = ray_end
+	raycast.collide_with_bodies = true
+	raycast.collide_with_areas = true
+	raycast.collision_mask = 1
+	
+	var space_state = get_tree().root.get_world_3d().direct_space_state
+	var result = space_state.intersect_ray(raycast)
+	
+	if !result:
+		return
+	
+	var collider = result.collider
+	
+	if not collider.is_in_group("Grabbable"):
+		return
+	
+	grab.emit(collider)

@@ -61,8 +61,9 @@ func _process(delta: float) -> void:
 	camera.set_orthogonal(1440, 0.01, 4000)
 	camera.fov = 2.0
 
-func right_controller_button_pressed(_btn_name: String) -> void:
-	pass
+func right_controller_button_pressed(btn_name: String) -> void:
+	if btn_name == "trigger_click":
+		self.instatiate_grab_ray_Cast()
 
 func _ready() -> void:
 	composition.layer_viewport = layer_viewport
