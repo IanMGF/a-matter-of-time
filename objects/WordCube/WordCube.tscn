@@ -65,3 +65,5 @@ root_node = NodePath("../PosZ")
 libraries = {
 &"": SubResource("AnimationLibrary_e004g")
 }
+
+[node name="Grabbable" type="Node" parent="."]
