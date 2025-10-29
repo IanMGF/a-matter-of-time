@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://m2v1kfj2ueib"]
+[gd_scene load_steps=6 format=3 uid="uid://m2v1kfj2ueib"]
 
-<<<<<<< Updated upstream
-[ext_resource type="Script" uid="uid://lv6qdgu47c4c" path="res://mechanics/control/controller.gd" id="1_8ak8y"]
-=======
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://b2lmvupr045pn" path="res://mechanics/control/knm_control.gd" id="1_gndvh"]
 [ext_resource type="PackedScene" uid="uid://cyb6bbp5ijswv" path="res://models/gun.glb" id="2_gndvh"]
->>>>>>> Stashed changes
+=======
+[ext_resource type="Script" uid="uid://lv6qdgu47c4c" path="res://mechanics/control/controller.gd" id="1_8ak8y"]
+[ext_resource type="PackedScene" uid="uid://bxvqmbfkw5sxr" path="res://models/gun/gun.glb" id="3_6vqvp"]
+>>>>>>> 7f6f24c3b4b00f134ed2aaf567706d1d70db9b24
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gndvh"]
 
@@ -24,7 +25,6 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="XROrigin" type="XROrigin3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.536743e-07, -0.0067687333, -0.0053854063)
-world_scale = 1.0
 current = true
 
 [node name="OpenXRCompositionLayerQuad" type="OpenXRCompositionLayerQuad" parent="CharacterBody3D/XROrigin"]
@@ -56,16 +56,20 @@ shape = SubResource("CapsuleShape3D_6vqvp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5126994, 0)
 tracker = &"right_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/XROrigin/RightHand"]
-transform = Transform3D(0.1, 0, 0, 0, 0.099, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_gndvh")
-
 [node name="Area3D" type="Area3D" parent="CharacterBody3D/XROrigin/RightHand"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/XROrigin/RightHand/Area3D"]
 transform = Transform3D(0.99999803, 0, -4.8428774e-08, 0, 0.9999995, 0, 4.8428774e-08, 0, 0.99999803, 0, 0, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_6vqvp")
+
+[node name="GunRoot" type="Node3D" parent="CharacterBody3D/XROrigin/RightHand"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="gun" parent="CharacterBody3D/XROrigin/RightHand/GunRoot" instance=ExtResource("3_6vqvp")]
+transform = Transform3D(-1.7484555e-07, 0, 4, 0, 4, 0, -4, 0, -1.7484555e-07, 0, -0.40166664, 1.0930701)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62489116, 0)

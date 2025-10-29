@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd8nhihypihy"]
+
+[ext_resource type="Script" uid="uid://crhakdf51w75o" path="res://objects/Button/button_press.gd" id="1_645dq"]
+[ext_resource type="PackedScene" uid="uid://dw65xhsk4la5e" path="res://models/button/base.glb" id="2_0bj5c"]
+[ext_resource type="PackedScene" uid="uid://bon6liub5mddl" path="res://models/button/button.glb" id="3_pk18i"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3ddr2"]
+height = 0.198143
+radius = 1.0107422
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bjm7u"]
+height = 0.1892395
+radius = 0.87353516
+
+[node name="Button" type="Node3D"]
+script = ExtResource("1_645dq")
+
+[node name="Base" parent="." instance=ExtResource("2_0bj5c")]
+
+[node name="BaseStaticBody" type="StaticBody3D" parent="Base"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/BaseStaticBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09926224, 0)
+shape = SubResource("CylinderShape3D_3ddr2")
+
+[node name="Cap" parent="." instance=ExtResource("3_pk18i")]
+
+[node name="DetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26475525, 0)
+shape = SubResource("CylinderShape3D_bjm7u")

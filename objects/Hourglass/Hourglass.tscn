@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyitnhqobxy0o"]
+
+[ext_resource type="Script" uid="uid://cqdqjkt6jujgb" path="res://objects/Hourglass/hourglass.gd" id="1_emt18"]
+[ext_resource type="PackedScene" uid="uid://b13xlde4sfrea" path="res://models/hourglass.glb" id="1_rsbgr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2e35d"]
+radius = 0.30763194
+
+[sub_resource type="QuadMesh" id="QuadMesh_hu0lp"]
+
+[node name="Hourglass" type="Node3D"]
+script = ExtResource("1_emt18")
+
+[node name="hourglass" parent="." instance=ExtResource("1_rsbgr")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_2e35d")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+mesh = SubResource("QuadMesh_hu0lp")

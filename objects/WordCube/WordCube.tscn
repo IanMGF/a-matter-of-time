@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://cloobna8uaexa"]
+
+[ext_resource type="Script" uid="uid://mydvgk2op3nl" path="res://objects/WordCube/word_cube.gd" id="1_kacfw"]
+[ext_resource type="PackedScene" uid="uid://bc6seuekl0tsp" path="res://models/word_cube.glb" id="2_e004g"]
+[ext_resource type="Texture2D" uid="uid://b4jsovil53xok" path="res://icon.svg" id="3_gwsbt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kacfw"]
+size = Vector3(0.775, 0.775, 0.775)
+
+[node name="WordCube" type="Node3D"]
+script = ExtResource("1_kacfw")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="BoxCollider" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_kacfw")
+
+[node name="Model" parent="RigidBody3D" instance=ExtResource("2_e004g")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="WordFaces" type="Node3D" parent="RigidBody3D"]
+
+[node name="PosZ" type="Sprite3D" parent="RigidBody3D/WordFaces"]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0.5)
+double_sided = false
+texture = ExtResource("3_gwsbt")
+
+[node name="PosX" type="Sprite3D" parent="RigidBody3D/WordFaces"]
+transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0.5, 0, 0)
+axis = 0
+double_sided = false
+texture = ExtResource("3_gwsbt")
+
+[node name="NegZ" type="Sprite3D" parent="RigidBody3D/WordFaces"]
+transform = Transform3D(-0.06, 0, -9.059748e-09, 0, 0.06, 0, 9.059748e-09, 0, -0.06, 0, 0, -0.5)
+double_sided = false
+texture = ExtResource("3_gwsbt")
+
+[node name="NegX" type="Sprite3D" parent="RigidBody3D/WordFaces"]
+transform = Transform3D(-0.06, 0, -9.059748e-09, 0, 0.06, 0, 9.059748e-09, 0, -0.06, -0.5, 0, 0)
+axis = 0
+double_sided = false
+texture = ExtResource("3_gwsbt")
