@@ -30,6 +30,7 @@ window/size/borderless=true
 
 Breakable=""
 WordCube=""
+Grabbable=""
 
 [input]
 
