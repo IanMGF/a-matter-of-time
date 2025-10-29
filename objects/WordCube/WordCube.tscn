@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cloobna8uaexa"]
+[gd_scene load_steps=7 format=3 uid="uid://cloobna8uaexa"]
 
 [ext_resource type="Script" uid="uid://mydvgk2op3nl" path="res://objects/WordCube/word_cube.gd" id="1_kacfw"]
 [ext_resource type="PackedScene" uid="uid://bc6seuekl0tsp" path="res://models/word_cube.glb" id="2_e004g"]
@@ -7,37 +7,61 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_kacfw"]
 size = Vector3(0.775, 0.775, 0.775)
 
-[node name="WordCube" type="Node3D"]
+[sub_resource type="Animation" id="Animation_kacfw"]
+resource_name = "Flickering"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e004g"]
+_data = {
+&"Flickering": SubResource("Animation_kacfw")
+}
+
+[node name="WordCube" type="RigidBody3D" groups=["WordCube"]]
 script = ExtResource("1_kacfw")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-
-[node name="BoxCollider" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="BoxCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_kacfw")
 
-[node name="Model" parent="RigidBody3D" instance=ExtResource("2_e004g")]
+[node name="Model" parent="." instance=ExtResource("2_e004g")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
-[node name="WordFaces" type="Node3D" parent="RigidBody3D"]
+[node name="WordFaces" type="Node3D" parent="."]
 
-[node name="PosZ" type="Sprite3D" parent="RigidBody3D/WordFaces"]
+[node name="PosZ" type="Sprite3D" parent="WordFaces"]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0.5)
 double_sided = false
 texture = ExtResource("3_gwsbt")
 
-[node name="PosX" type="Sprite3D" parent="RigidBody3D/WordFaces"]
+[node name="PosX" type="Sprite3D" parent="WordFaces"]
 transform = Transform3D(0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0.5, 0, 0)
 axis = 0
 double_sided = false
 texture = ExtResource("3_gwsbt")
 
-[node name="NegZ" type="Sprite3D" parent="RigidBody3D/WordFaces"]
+[node name="NegZ" type="Sprite3D" parent="WordFaces"]
 transform = Transform3D(-0.06, 0, -9.059748e-09, 0, 0.06, 0, 9.059748e-09, 0, -0.06, 0, 0, -0.5)
 double_sided = false
 texture = ExtResource("3_gwsbt")
 
-[node name="NegX" type="Sprite3D" parent="RigidBody3D/WordFaces"]
+[node name="NegX" type="Sprite3D" parent="WordFaces"]
 transform = Transform3D(-0.06, 0, -9.059748e-09, 0, 0.06, 0, 9.059748e-09, 0, -0.06, -0.5, 0, 0)
 axis = 0
 double_sided = false
 texture = ExtResource("3_gwsbt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WordFaces"]
+root_node = NodePath("../PosZ")
+libraries = {
+&"": SubResource("AnimationLibrary_e004g")
+}
