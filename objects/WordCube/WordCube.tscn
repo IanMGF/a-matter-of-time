@@ -27,7 +27,7 @@ _data = {
 &"Flickering": SubResource("Animation_kacfw")
 }
 
-[node name="WordCube" type="RigidBody3D" groups=["WordCube"]]
+[node name="WordCube" type="RigidBody3D" groups=["Grabbable", "WordCube"]]
 script = ExtResource("1_kacfw")
 
 [node name="BoxCollider" type="CollisionShape3D" parent="."]
