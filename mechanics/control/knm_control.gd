@@ -13,7 +13,11 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func get_gun_facing() -> Vector3:
-	return camera.global_rotation
+	var viewport_size = get_viewport().size
+	var screen_center = viewport_size / 2
+	var vec = camera.project_ray_normal(screen_center)
+	
+	return vec
 
 func get_gun_origin() -> Vector3:
 	return camera.global_position
