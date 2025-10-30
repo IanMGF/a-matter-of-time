@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://m2v1kfj2ueib"]
+[gd_scene load_steps=10 format=3 uid="uid://m2v1kfj2ueib"]
 
 [ext_resource type="Script" uid="uid://b2lmvupr045pn" path="res://mechanics/control/knm_control.gd" id="1_gndvh"]
+[ext_resource type="PackedScene" uid="uid://jpkyt5lgal1m" path="res://models/gun/gunv2.glb" id="2_fca01"]
 [ext_resource type="Script" uid="uid://daca12k2nffnn" path="res://objects/Player/popup_handler.gd" id="3_3voyg"]
 [ext_resource type="PackedScene" uid="uid://bxvqmbfkw5sxr" path="res://models/gun/gun.glb" id="3_6vqvp"]
 [ext_resource type="Script" uid="uid://bculktcby0jhc" path="res://mechanics/control/grab_ray_cast_controller.gd" id="3_f6j3j"]
@@ -66,8 +67,12 @@ shape = SubResource("CapsuleShape3D_6vqvp")
 [node name="GunRoot" type="Node3D" parent="CharacterBody3D/XROrigin/RightHand"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
+[node name="gunv2" parent="CharacterBody3D/XROrigin/RightHand/GunRoot" instance=ExtResource("2_fca01")]
+transform = Transform3D(-1.7484555e-07, 0, 4, 0, 4, 0, -4, 0, -1.7484555e-07, 0, -0.402, 1.093)
+
 [node name="gun" parent="CharacterBody3D/XROrigin/RightHand/GunRoot" instance=ExtResource("3_6vqvp")]
 transform = Transform3D(-1.7484555e-07, 0, 4, 0, 4, 0, -4, 0, -1.7484555e-07, 0, -0.40166664, 1.0930701)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62489116, 0)
