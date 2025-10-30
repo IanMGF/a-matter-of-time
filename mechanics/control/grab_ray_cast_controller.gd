@@ -2,6 +2,13 @@ extends Node
 @onready var player_node : PlayerControl = self.get_parent()
 @onready var grab_object : Node3D = null
 
+
+const ATTRACTION_FORCE_FACTOR = 750		# Increasing this makes the object move faster towards the player
+const DRAG_FORCE_FACTOR = 200			# Increasing this removes exceeding forces faster
+
+const ATTRACTION_FORCE_LIMIT = 750
+const DRAG_FORCE_LIMIT = 200
+
 func object_grabbed(collider : RigidBody3D) -> void:
 	if grab_object:
 		return
@@ -31,9 +38,14 @@ func _physics_process(delta: float) -> void:
 
 	var rigid_grabbed_object : RigidBody3D = grab_object
 
+	# Adjust position
 	var attraction_force: Vector3 = target_position - rigid_grabbed_object.global_position
-	attraction_force *= delta * 750 * target_position.distance_to(rigid_grabbed_object.global_position)
+	attraction_force *= delta * ATTRACTION_FORCE_FACTOR * target_position.distance_to(rigid_grabbed_object.global_position)
+	attraction_force = attraction_force.limit_length(ATTRACTION_FORCE_LIMIT)
 
-	var drag_force: Vector3 = rigid_grabbed_object.linear_velocity * -200 * delta
+	var drag_force: Vector3 = rigid_grabbed_object.linear_velocity * -DRAG_FORCE_FACTOR * delta
+	drag_force = drag_force.limit_length(DRAG_FORCE_LIMIT)
 
-	rigid_grabbed_object.apply_force(attraction_force.limit_length(750) + drag_force.limit_length(200))
+	rigid_grabbed_object.apply_force(attraction_force + drag_force)
+
+
