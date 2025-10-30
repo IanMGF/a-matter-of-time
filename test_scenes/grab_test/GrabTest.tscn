@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://l3y5k8o0ubh6"]
+
+[ext_resource type="Script" uid="uid://djsf78wncrxod" path="res://test_scenes/grab_test/grab_test.gd" id="1_dghmt"]
+[ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player/Player.tscn" id="1_rdf36"]
+[ext_resource type="PackedScene" uid="uid://cloobna8uaexa" path="res://objects/WordCube/WordCube.tscn" id="2_rjslr"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8w05j"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7gbxk"]
+
+[node name="GrabTest" type="Node3D" node_paths=PackedStringArray("player_node")]
+script = ExtResource("1_dghmt")
+player_node = NodePath("Player")
+
+[node name="StaticLevelStructure" type="StaticBody3D" parent="."]
+
+[node name="Floor" type="CollisionShape3D" parent="StaticLevelStructure"]
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Floor"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Wall1" type="CollisionShape3D" parent="StaticLevelStructure"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -10)
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Wall1"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Wall2" type="CollisionShape3D" parent="StaticLevelStructure"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 10, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Wall2"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Wall3" type="CollisionShape3D" parent="StaticLevelStructure"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 10)
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Wall3"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Wall4" type="CollisionShape3D" parent="StaticLevelStructure"]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -10, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_8w05j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticLevelStructure/Wall4"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_7gbxk")
+
+[node name="Player" parent="." instance=ExtResource("1_rdf36")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3905864, 0.0033843666, 2.905809)
+
+[node name="Illumination" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Illumination"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Illumination"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.9370794, 0)
+omni_range = 20.0
+
+[node name="WordCube" parent="." instance=ExtResource("2_rjslr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05131817, 0.3914496, -0.6611886)
+
+[node name="WordCube3" parent="." instance=ExtResource("2_rjslr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1539545, 2.1404815, -0.5457649)
+
+[node name="WordCube2" parent="." instance=ExtResource("2_rjslr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10263634, 1.2659655, -0.60347676)
