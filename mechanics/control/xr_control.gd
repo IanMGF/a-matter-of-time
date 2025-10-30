@@ -18,6 +18,9 @@ var controller_position: Vector2
 func input_controller_movement(_name: String, value: Vector2) -> void:
 	controller_position = value
 
+func input_rotation(_name: String, value: Vector2) -> void:
+	pass
+
 func left_controller_button_pressed(btn_name: String) -> void:
 	if btn_name == "trigger_click":
 		var viewport_size = get_viewport().size
@@ -50,7 +53,7 @@ func left_controller_button_pressed(btn_name: String) -> void:
 func _process(delta: float) -> void:
 	var hitbox_2d_pos = Vector2(hitbox.global_position.x, hitbox.global_position.z)
 	var camera_2d_pos = Vector2(camera.global_position.x, camera.global_position.z)
-	
+
 	var distance = hitbox_2d_pos.distance_to(camera_2d_pos)
 	if distance < 0.2:
 		camera.set_cull_mask_value(1, true)
@@ -59,7 +62,6 @@ func _process(delta: float) -> void:
 
 	camera.set_cull_mask_value(1, false)
 	camera.set_orthogonal(1440, 0.01, 4000)
-	camera.fov = 2.0
 
 func right_controller_button_pressed(btn_name: String) -> void:
 	if btn_name == "trigger_click":
@@ -69,7 +71,10 @@ func _ready() -> void:
 	composition.layer_viewport = layer_viewport
 	xr_controller_left.input_vector2_changed.connect(input_controller_movement)
 	xr_controller_left.button_pressed.connect(left_controller_button_pressed)
+
+	xr_controller_right.input_float_changed.connect(input_rotation)
 	xr_controller_right.button_pressed.connect(right_controller_button_pressed)
+
 	character_body.velocity = Vector3.ZERO
 
 	var left_hand_mesh = $CharacterBody3D/XROrigin/LeftHand/MeshInstance3D
@@ -81,10 +86,11 @@ func _ready() -> void:
 	right_hand_mesh.scale = hands_scale_vector
 
 func get_gun_facing() -> Vector3:
-	return xr_controller_right.global_rotation
+	var vec = -xr_controller_right.global_basis.z.normalized()
+	return vec
 
 func get_gun_origin() -> Vector3:
-	return xr_controller_right.global_position
+	return xr_controller_right.get_node("GunRoot").get_node("GunCenter").global_position
 
 func get_camera() -> Camera3D:
 	return camera
