@@ -94,9 +94,12 @@ func get_gun_facing() -> Vector3:
 	var vec = -xr_controller_right.global_basis.z.normalized()
 	return vec
 
-func get_gun_origin() -> Vector3:
+func get_gun_geometric_origin() -> Vector3:
 	return xr_controller_right.get_node("GunRoot").get_node("GunPoint").global_position
 
+func get_gun_cast_origin() -> Vector3:
+	return xr_controller_right.get_node("GunRoot").get_node("GunPoint").global_position
+	
 func get_camera() -> Camera3D:
 	return camera
 
