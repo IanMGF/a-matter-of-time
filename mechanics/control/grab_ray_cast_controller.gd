@@ -1,7 +1,8 @@
 extends Node
 @onready var player_node : PlayerControl = self.get_parent()
-@onready var grab_object : Node3D = null
+@onready var grabbed_object : RigidBody3D = null
 
+@onready var previous_gravity = null
 
 const ATTRACTION_FORCE_FACTOR = 750		# Increasing this makes the object move faster towards the player
 const DRAG_FORCE_FACTOR = 200			# Increasing this removes exceeding forces faster
@@ -9,43 +10,39 @@ const DRAG_FORCE_FACTOR = 200			# Increasing this removes exceeding forces faste
 const ATTRACTION_FORCE_LIMIT = 750
 const DRAG_FORCE_LIMIT = 200
 
-func object_grabbed(collider : RigidBody3D) -> void:
-	if grab_object:
+func grab_object(collider : RigidBody3D) -> void:
+	if grabbed_object or not is_instance_of(collider, RigidBody3D):
 		return
 
-	grab_object = collider
-	if is_instance_of(grab_object, RigidBody3D):
-		grab_object.gravity_scale = 0
+	grabbed_object = collider
+	previous_gravity = grabbed_object.gravity_scale
+	grabbed_object.gravity_scale = 0
 
-func object_released() -> void:
-	if is_instance_of(grab_object, RigidBody3D):
-		grab_object.gravity_scale = 1
+func release_object() -> void:
+	if grabbed_object == null:
+		return
+	grabbed_object.gravity_scale = previous_gravity
 
-	grab_object = null
+	grabbed_object = null
 
 func _ready() -> void:
-	player_node.grab.connect(object_grabbed)
-	player_node.release.connect(object_released)
+	player_node.grab.connect(grab_object)
+	player_node.release.connect(release_object)
 
 func _physics_process(delta: float) -> void:
-	if !grab_object:
+	if grabbed_object == null:
 		return
 
-	var target_position : Vector3 = player_node.get_gun_origin() + player_node.get_gun_facing() * player_node.interact_range
-
-	if not is_instance_of(grab_object, RigidBody3D):
-		return
-
-	var rigid_grabbed_object : RigidBody3D = grab_object
-
+	var target_position : Vector3 = player_node.get_gun_cast_origin() + player_node.get_gun_facing() * player_node.interact_range
+	
 	# Adjust position
-	var attraction_force: Vector3 = target_position - rigid_grabbed_object.global_position
-	attraction_force *= delta * ATTRACTION_FORCE_FACTOR * target_position.distance_to(rigid_grabbed_object.global_position)
+	var attraction_force: Vector3 = target_position - grabbed_object.global_position
+	attraction_force *= delta * ATTRACTION_FORCE_FACTOR * target_position.distance_to(grabbed_object.global_position)
 	attraction_force = attraction_force.limit_length(ATTRACTION_FORCE_LIMIT)
 
-	var drag_force: Vector3 = rigid_grabbed_object.linear_velocity * -DRAG_FORCE_FACTOR * delta
+	var drag_force: Vector3 = grabbed_object.linear_velocity * -DRAG_FORCE_FACTOR * delta
 	drag_force = drag_force.limit_length(DRAG_FORCE_LIMIT)
 
-	rigid_grabbed_object.apply_force(attraction_force + drag_force)
+	grabbed_object.apply_force(attraction_force + drag_force)
 
 
