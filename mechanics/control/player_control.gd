@@ -37,7 +37,7 @@ func get_movement_direction() -> Vector2
 @abstract
 func get_speed() -> float
 
-func instatiate_grab_ray_Cast() -> void:
+func attempt_grab() -> void:
 	var ray_origin = self.get_gun_origin()
 	var ray_direction = self.get_gun_facing()
 	var ray_end = ray_origin + ray_direction * self.interact_range
