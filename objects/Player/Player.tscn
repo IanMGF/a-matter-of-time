@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://m2v1kfj2ueib"]
+[gd_scene load_steps=11 format=3 uid="uid://m2v1kfj2ueib"]
 
 [ext_resource type="Script" uid="uid://b2lmvupr045pn" path="res://mechanics/control/knm_control.gd" id="1_gndvh"]
 [ext_resource type="Script" uid="uid://daca12k2nffnn" path="res://objects/Player/popup_handler.gd" id="3_3voyg"]
 [ext_resource type="PackedScene" uid="uid://cvdfytue7yk2c" path="res://models/gun/gun.glb" id="3_6vqvp"]
 [ext_resource type="Script" uid="uid://bculktcby0jhc" path="res://mechanics/control/grab_ray_cast_controller.gd" id="3_f6j3j"]
 [ext_resource type="Texture2D" uid="uid://coslop22ns88a" path="res://imgs/Xbox Series/XboxSeriesX_X.png" id="4_jp6ib"]
+[ext_resource type="Script" uid="uid://bsdafdoarjd4m" path="res://objects/Player/gun_root.gd" id="5_fca01"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gndvh"]
 
@@ -102,11 +103,18 @@ curve = SubResource("Curve3D_jp6ib")
 
 [node name="Hands" type="Node" parent="."]
 
-[node name="GunRoot" type="Node3D" parent="Hands"]
+[node name="GunRoot" type="Node3D" parent="Hands" node_paths=PackedStringArray("gun_animation_player")]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -4.7683716e-07, 0.75296533, -0.0026927032)
+script = ExtResource("5_fca01")
+gun_animation_player = NodePath("gun/AnimationPlayer")
 
 [node name="gun" parent="Hands/GunRoot" instance=ExtResource("3_6vqvp")]
 transform = Transform3D(-1.7484555e-07, 0, 4, 0, 4, 0, -4, 0, -1.7484555e-07, 0, -0.40200043, 1.0930002)
 
+[node name="Cube_001" parent="Hands/GunRoot/gun" index="1"]
+transform = Transform3D(0.029890185, 0, 0, 0, 0.027417177, -0.0012377154, 0, 0.0012377154, 0.027417177, 0.37120536, 0.39001927, -0.0054765334)
+
 [node name="GunPoint" type="Node3D" parent="Hands/GunRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.066031665, 1.1170788, -0.75719714)
+
+[editable path="Hands/GunRoot/gun"]
