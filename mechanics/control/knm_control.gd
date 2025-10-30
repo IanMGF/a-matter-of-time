@@ -2,7 +2,7 @@ extends PlayerControl
 
 @onready var camera: Camera3D = $CharacterBody3D/XROrigin/XRCamera3D
 
-const SENSITIVITY = 0.001
+const SENSITIVITY = 0.0025
 const VIEW_EPSILON = 0
 
 const MAX_PITCH = PI/2 - VIEW_EPSILON
