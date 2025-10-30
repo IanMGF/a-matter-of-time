@@ -23,7 +23,10 @@ func _physics_process(delta: float) -> void:
 func get_gun_facing() -> Vector3
 
 @abstract
-func get_gun_origin() -> Vector3
+func get_gun_cast_origin() -> Vector3
+
+@abstract
+func get_gun_geometric_origin() -> Vector3
 
 @abstract
 func get_camera() -> Camera3D
@@ -38,7 +41,7 @@ func get_movement_direction() -> Vector2
 func get_speed() -> float
 
 func attempt_grab() -> void:
-	var ray_origin = self.get_gun_origin()
+	var ray_origin = self.get_gun_cast_origin()
 	var ray_direction = self.get_gun_facing()
 	var ray_end = ray_origin + ray_direction * self.interact_range
 	

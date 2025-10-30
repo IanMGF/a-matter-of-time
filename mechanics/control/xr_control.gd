@@ -65,9 +65,14 @@ func _process(delta: float) -> void:
 
 func right_controller_button_pressed(btn_name: String) -> void:
 	if btn_name == "trigger_click":
-		self.instatiate_grab_ray_Cast()
+		self.attempt_grab()
 
 func _ready() -> void:
+
+	var gun = $Hands/GunRoot
+	gun.reparent(xr_controller_right)
+	gun.position = Vector3.ZERO
+
 	composition.layer_viewport = layer_viewport
 	xr_controller_left.input_vector2_changed.connect(input_controller_movement)
 	xr_controller_left.button_pressed.connect(left_controller_button_pressed)
@@ -90,7 +95,7 @@ func get_gun_facing() -> Vector3:
 	return vec
 
 func get_gun_origin() -> Vector3:
-	return xr_controller_right.get_node("GunRoot").get_node("GunCenter").global_position
+	return xr_controller_right.get_node("GunRoot").get_node("GunPoint").global_position
 
 func get_camera() -> Camera3D:
 	return camera

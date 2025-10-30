@@ -20,13 +20,22 @@ func _process(_delta: float) -> void:
 	raycast.from = origin_point
 	raycast.to = origin_point + normal * interact_range
 	raycast.collide_with_bodies = true
-	raycast.collide_with_areas = true
 
 	var space_state = get_tree().root.get_world_3d().direct_space_state
 	var result = space_state.intersect_ray(raycast)
 
 	if !result:
 		popup.visible = false
+		return
+	
+	raycast.from = origin_point
+	raycast.to = result.collider.global_position
+	raycast.collide_with_bodies = true
+	
+	var popup_place = space_state.intersect_ray(raycast)
+	if popup_place:
+		popup.global_position = popup_place.position
 	else:
-		popup.visible = true
 		popup.global_position = result.collider.global_position
+	
+	popup.visible = true

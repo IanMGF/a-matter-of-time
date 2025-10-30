@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://m2v1kfj2ueib"]
+[gd_scene load_steps=10 format=3 uid="uid://m2v1kfj2ueib"]
 
 [ext_resource type="Script" uid="uid://b2lmvupr045pn" path="res://mechanics/control/knm_control.gd" id="1_gndvh"]
 [ext_resource type="Script" uid="uid://daca12k2nffnn" path="res://objects/Player/popup_handler.gd" id="3_3voyg"]
@@ -13,6 +13,8 @@ radius = 0.52490234
 height = 1.9335938
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f6j3j"]
+
+[sub_resource type="Curve3D" id="Curve3D_jp6ib"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_gndvh")
@@ -63,12 +65,6 @@ transform = Transform3D(0.99999803, 0, -4.8428774e-08, 0, 0.9999995, 0, 4.842877
 visible = false
 shape = SubResource("CapsuleShape3D_6vqvp")
 
-[node name="GunRoot" type="Node3D" parent="CharacterBody3D/XROrigin/RightHand"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="gun" parent="CharacterBody3D/XROrigin/RightHand/GunRoot" instance=ExtResource("3_6vqvp")]
-transform = Transform3D(-1.7484555e-07, 0, 4, 0, 4, 0, -4, 0, -1.7484555e-07, 0, -0.40200043, 1.0930002)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62489116, 0)
 shape = SubResource("CapsuleShape3D_f6j3j")
@@ -85,3 +81,32 @@ texture = ExtResource("4_jp6ib")
 
 [node name="GrabRayCastController" type="Node" parent="."]
 script = ExtResource("3_f6j3j")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="GrabRayCastController"]
+polygon = PackedVector2Array(-0.009877234, 0.0007597893, 0.00025325437, 0.011903332, 0.010383751, 0.00025326308, 0.0007597821, -0.012409858)
+mode = 2
+path_node = NodePath("Path3D")
+path_interval_type = 0
+path_interval = 0.1
+path_simplify_angle = 0.4
+path_rotation = 1
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+
+[node name="Path3D" type="Path3D" parent="GrabRayCastController/CSGPolygon3D"]
+curve = SubResource("Curve3D_jp6ib")
+
+[node name="Hands" type="Node" parent="."]
+
+[node name="GunRoot" type="Node3D" parent="Hands"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -4.7683716e-07, 0.75296533, -0.0026927032)
+
+[node name="gun" parent="Hands/GunRoot" instance=ExtResource("3_6vqvp")]
+transform = Transform3D(-1.7484555e-07, 0, 4, 0, 4, 0, -4, 0, -1.7484555e-07, 0, -0.40200043, 1.0930002)
+
+[node name="GunPoint" type="Node3D" parent="Hands/GunRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.066031665, 1.1170788, -0.75719714)
