@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://m2v1kfj2ueib"]
 
-[ext_resource type="Script" uid="uid://b2lmvupr045pn" path="res://mechanics/control/knm_control.gd" id="1_gndvh"]
+[ext_resource type="Script" uid="uid://b2lmvupr045pn" path="res://objects/Player/Controls/knm_control.gd" id="1_gndvh"]
 [ext_resource type="Script" uid="uid://daca12k2nffnn" path="res://objects/Player/popup_handler.gd" id="3_3voyg"]
 [ext_resource type="PackedScene" uid="uid://cvdfytue7yk2c" path="res://models/gun/gun.glb" id="3_6vqvp"]
-[ext_resource type="Script" uid="uid://bculktcby0jhc" path="res://mechanics/control/grab_ray_cast_controller.gd" id="3_f6j3j"]
+[ext_resource type="Script" uid="uid://bculktcby0jhc" path="res://objects/Player/grab.gd" id="3_f6j3j"]
 [ext_resource type="Texture2D" uid="uid://coslop22ns88a" path="res://imgs/Xbox Series/XboxSeriesX_X.png" id="4_jp6ib"]
-[ext_resource type="Script" uid="uid://bsdafdoarjd4m" path="res://objects/Player/gun_root.gd" id="5_fca01"]
+[ext_resource type="Script" uid="uid://bsdafdoarjd4m" path="res://objects/Player/gun_anim.gd" id="5_fca01"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gndvh"]
 
