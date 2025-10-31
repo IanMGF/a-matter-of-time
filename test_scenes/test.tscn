@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://c1yyiykeq6dts"]
 
-[ext_resource type="Script" uid="uid://2ubgm4orlyww" path="res://mechanics/control/xr_setup.gd" id="1_g14j6"]
+[ext_resource type="Script" uid="uid://2ubgm4orlyww" path="res://mechanics/xr_setup.gd" id="1_g14j6"]
 [ext_resource type="PackedScene" uid="uid://drsvlmie7dumn" path="res://objects/BreakableWall/BreakableWall.tscn" id="2_8uh7m"]
 [ext_resource type="Texture2D" uid="uid://sg83dllbkhov" path="res://imgs/Oculus Inputs/Oculus_LT.png" id="2_ppyta"]
-[ext_resource type="Script" uid="uid://be4n13a5auwc" path="res://mechanics/ui/living_prompt.gd" id="2_ykrsh"]
+[ext_resource type="Script" path="res://mechanics/ui/living_prompt.gd" id="2_ykrsh"]
 [ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player/Player.tscn" id="6_g14j6"]
 
 [sub_resource type="FontVariation" id="FontVariation_6uqi0"]
