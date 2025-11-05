@@ -10,8 +10,8 @@ const MAX_PITCH = PI/2 - VIEW_EPSILON
 
 func _ready() -> void:
 	gun.reparent(camera)
-	gun.position = Vector3(0.088, -0.138, -0.132)
-	gun.rotation = Vector3.ZERO
+	gun.position = Vector3(0.125, -0.138, -0.112)
+	gun.rotation = Vector3(0, -0.4, 0)
 	$CharacterBody3D/XROrigin/LeftHand.queue_free()
 	$CharacterBody3D/XROrigin/RightHand.queue_free()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
