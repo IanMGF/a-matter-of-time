@@ -1,9 +1,9 @@
 extends PlayerControl
 
-@onready var camera: Camera3D = $CharacterBody3D/XROrigin/XRCamera3D
+@onready var camera: Camera3D = $CharacterBody3D/XROrigin/Camera
 @onready var gun: Node3D = $Hands/GunRoot
 
-const SENSITIVITY = 0.0025
+const SENSITIVITY = 2.5e-3
 const VIEW_EPSILON = 0
 
 const MAX_PITCH = PI/2 - VIEW_EPSILON
