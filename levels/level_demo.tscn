@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2aqewng6ppcq"]
+
+[ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player/Player.tscn" id="1_4af5r"]
+[ext_resource type="PackedScene" uid="uid://by701slf6o4l8" path="res://levels/Level Demo/LevelObjs/Room1.tscn" id="2_lah05"]
+[ext_resource type="PackedScene" uid="uid://dejcckcindmi" path="res://objects/TimeMachine/TimeMachine.tscn" id="2_ncbl7"]
+[ext_resource type="PackedScene" uid="uid://ccjpe7ydy7wnq" path="res://levels/Level Demo/LevelObjs/Room2.tscn" id="3_35xw5"]
+[ext_resource type="PackedScene" uid="uid://oj6qhn0et04l" path="res://levels/Level Demo/LevelObjs/Room3.tscn" id="4_db0ep"]
+[ext_resource type="PackedScene" uid="uid://djkaaxgvbu0n5" path="res://levels/Level Demo/LevelObjs/Room4.tscn" id="5_t1rr2"]
+[ext_resource type="PackedScene" uid="uid://c6x1bbwwuodcn" path="res://levels/Level Demo/LevelObjs/Room5.tscn" id="6_kpeon"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("1_4af5r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0359688, -2.3841858e-07, 3.0384789)
+
+[node name="Level Structure" type="Node3D" parent="."]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level Structure"]
+use_collision = true
+
+[node name="Room1" parent="Level Structure/CSGCombiner3D" instance=ExtResource("2_lah05")]
+
+[node name="Room2" parent="Level Structure/CSGCombiner3D" instance=ExtResource("3_35xw5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+
+[node name="Room3" parent="Level Structure/CSGCombiner3D" instance=ExtResource("4_db0ep")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+
+[node name="Room4" parent="Level Structure/CSGCombiner3D" instance=ExtResource("5_t1rr2")]
+
+[node name="Room5" parent="Level Structure/CSGCombiner3D" instance=ExtResource("6_kpeon")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -43)
+
+[node name="TimeMachine" parent="Level Structure" instance=ExtResource("2_ncbl7")]
+transform = Transform3D(0.6011876, 0, -0.79910797, 0, 1, 0, 0.79910797, 0, 0.6011876, -4.2912807, 0, 3.2249565)

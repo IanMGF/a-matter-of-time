@@ -1,0 +1,208 @@
+[gd_scene load_steps=10 format=3 uid="uid://djkaaxgvbu0n5"]
+
+[ext_resource type="Script" uid="uid://cfr7o7je4v1a5" path="res://levels/Level Demo/room4/room_o.gd" id="1_isl1a"]
+[ext_resource type="PackedScene" uid="uid://c04j1g4ol567c" path="res://objects/Door/Door.tscn" id="2_sedom"]
+[ext_resource type="Script" uid="uid://ca4cyt2dyhg3f" path="res://levels/Level Demo/room4/room_a.gd" id="3_f5vpr"]
+[ext_resource type="PackedScene" uid="uid://iy1xk4pxhgv5" path="res://objects/Box/Box.tscn" id="4_vhoef"]
+[ext_resource type="PackedScene" uid="uid://bd8nhihypihy" path="res://objects/Button/Button.tscn" id="5_mxroq"]
+[ext_resource type="Script" uid="uid://byv5g4vo3g05t" path="res://levels/Level Demo/room4/room_b.gd" id="6_8dhiy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_60bc5"]
+size = Vector3(2.8224487, 4, 4.388916)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_35xw5"]
+size = Vector3(12, 4, 7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4aig2"]
+size = Vector3(1, 4, 3)
+
+[node name="Room4" type="CSGCombiner3D"]
+
+[node name="Room4O" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -33)
+script = ExtResource("1_isl1a")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Room4O"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+size = Vector3(12, 1, 11)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Room4O"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6, 1.5, -0.5)
+size = Vector3(11, 5, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Room4O"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -0.5)
+size = Vector3(12, 1, 11)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Room4O"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6, 1.5, -0.5)
+size = Vector3(11, 5, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Room4O"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.181, 1.5, 1.4528809)
+size = Vector3(7, 5, 2.0942383)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Room4O"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1.5, -5.6709595)
+size = Vector3(16, 5, 0.34191895)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Room4O/CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 1.6643825, -0.7838495, 0)
+operation = 2
+radius = 1.7041016
+sides = 12
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room4O"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7011676, 2.9122648, 3.6849556)
+shadow_enabled = true
+omni_range = 16.09226
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Room4O"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0538988, 2.909765, -1.4231186)
+shadow_enabled = true
+omni_range = 13.529833
+
+[node name="BRoomTrigger" type="Area3D" parent="Room4O"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4O/BRoomTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38824463, 1.0620117, 0.5986328)
+shape = SubResource("BoxShape3D_60bc5")
+
+[node name="ARoomTrigger" type="Area3D" parent="Room4O"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4O/ARoomTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47702026, 1.0620117, 1.7930908)
+shape = SubResource("BoxShape3D_60bc5")
+
+[node name="StationaryArea" type="Area3D" parent="Room4O"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4O/StationaryArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
+shape = SubResource("BoxShape3D_35xw5")
+
+[node name="Door" parent="Room4O" instance=ExtResource("2_sedom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18082881, -4.7683716e-07, -5.6560965)
+
+[node name="Room4A" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -33)
+script = ExtResource("3_f5vpr")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Room4A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+size = Vector3(12, 1, 11)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Room4A"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6, 1.5, -0.5)
+size = Vector3(11, 5, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Room4A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -0.5)
+size = Vector3(12, 1, 11)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Room4A"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6, 1.5, -0.5)
+size = Vector3(11, 5, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Room4A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18099976, 1.5, 1.4528809)
+size = Vector3(7, 5, 2.0942383)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Room4A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.6709595)
+size = Vector3(12, 5, 0.34191895)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room4A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7011676, 2.9122648, 3.6849556)
+shadow_enabled = true
+omni_range = 16.09226
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Room4A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0538988, 2.909765, -1.4231186)
+shadow_enabled = true
+omni_range = 13.529833
+
+[node name="WordCube" parent="Room4A" instance=ExtResource("4_vhoef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04253, 0.33982408, -1.0495567)
+
+[node name="ARoomTrigger" type="Area3D" parent="Room4A"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4A/ARoomTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6117554, 1.0620117, 2.5986328)
+shape = SubResource("BoxShape3D_4aig2")
+
+[node name="StationaryArea" type="Area3D" parent="Room4A"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4A/StationaryArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
+shape = SubResource("BoxShape3D_35xw5")
+
+[node name="Button" parent="Room4A" instance=ExtResource("5_mxroq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04882908, -4.7683716e-07, -1.0091324)
+
+[node name="Room4B" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -33)
+script = ExtResource("6_8dhiy")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Room4B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+size = Vector3(12, 1, 11)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Room4B"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6, 1.5, -0.5)
+size = Vector3(11, 5, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Room4B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -0.5)
+size = Vector3(12, 1, 11)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Room4B"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6, 1.5, -0.5)
+size = Vector3(11, 5, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Room4B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.181, 1.5, 1.4528809)
+size = Vector3(7, 5, 2.0942383)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Room4B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.6709595)
+size = Vector3(12, 5, 0.34191895)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Room4B/CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.18335116, -0.7838495, 0)
+operation = 2
+radius = 1.7041016
+sides = 12
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room4B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7011676, 2.9122648, 3.6849556)
+shadow_enabled = true
+omni_range = 16.09226
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Room4B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0538988, 2.909765, -1.4231186)
+shadow_enabled = true
+omni_range = 13.529833
+
+[node name="Door" parent="Room4B" instance=ExtResource("2_sedom")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18082881, -4.7683716e-07, -5.6560965)
+
+[node name="BRoomTrigger" type="Area3D" parent="Room4B"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4B/BRoomTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3882446, 1.0620117, 2.5986328)
+shape = SubResource("BoxShape3D_4aig2")
+
+[node name="StationaryArea" type="Area3D" parent="Room4B"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4B/StationaryArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
+shape = SubResource("BoxShape3D_35xw5")
+
+[connection signal="pressed" from="Room4A/Button" to="Room4O/Door" method="open_door"]
+[connection signal="pressed" from="Room4A/Button" to="Room4B/Door" method="open_door"]
+[connection signal="released" from="Room4A/Button" to="Room4O/Door" method="close_door"]
+[connection signal="released" from="Room4A/Button" to="Room4B/Door" method="close_door"]

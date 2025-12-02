@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://oj6qhn0et04l"]
+
+[ext_resource type="PackedScene" uid="uid://iy1xk4pxhgv5" path="res://objects/Box/Box.tscn" id="1_mjjtr"]
+[ext_resource type="PackedScene" uid="uid://c04j1g4ol567c" path="res://objects/Door/Door.tscn" id="2_iyoy0"]
+[ext_resource type="PackedScene" uid="uid://bd8nhihypihy" path="res://objects/Button/Button.tscn" id="3_4gwva"]
+
+[node name="Room3" type="CSGCombiner3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
+size = Vector3(12, 1, 11)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6, 1.5, -0.5)
+size = Vector3(11, 5, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -0.5)
+size = Vector3(12, 1, 11)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6, 1.5, -0.5)
+size = Vector3(11, 5, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, -1)
+size = Vector3(7, 5, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.6709595)
+size = Vector3(12, 5, 0.34191895)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D7"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.18335116, -0.7838495, 0)
+operation = 2
+radius = 1.7041016
+sides = 12
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.384876, 1.5776051, 2.6849556)
+shadow_enabled = true
+omni_range = 16.09226
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.413751, 1.6344528, -3.624899)
+shadow_enabled = true
+omni_range = 13.529833
+
+[node name="WordCube" parent="." instance=ExtResource("1_mjjtr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7227397, 1.6215751, -3.6023426)
+gravity_scale = 0.0
+constant_force = Vector3(-1, 0, 0)
+
+[node name="Door" parent="." instance=ExtResource("2_iyoy0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18082881, -4.7683716e-07, -5.6560965)
+
+[node name="Button" parent="." instance=ExtResource("3_4gwva")]
+transform = Transform3D(-4.371139e-08, 1, -8.742278e-08, 1, 4.371139e-08, -3.821371e-15, 0, -8.742278e-08, -1, -5.514833, 1.3329651, 2.3783855)
+
+[connection signal="pressed" from="Button" to="Door" method="open_door"]
+[connection signal="released" from="Button" to="Door" method="close_door"]

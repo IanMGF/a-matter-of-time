@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://l3y5k8o0ubh6"]
+[gd_scene load_steps=7 format=3 uid="uid://l3y5k8o0ubh6"]
 
 [ext_resource type="Script" uid="uid://djsf78wncrxod" path="res://test_scenes/grab_test/grab_test.gd" id="1_dghmt"]
 [ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player/Player.tscn" id="1_rdf36"]
-[ext_resource type="PackedScene" uid="uid://cloobna8uaexa" path="res://objects/WordCube/WordCube.tscn" id="2_rjslr"]
+[ext_resource type="PackedScene" uid="uid://iy1xk4pxhgv5" path="res://objects/Box/Box.tscn" id="2_rjslr"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8w05j"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7gbxk"]
+
+[sub_resource type="Environment" id="Environment_rmwhl"]
 
 [node name="GrabTest" type="Node3D" node_paths=PackedStringArray("player_node")]
 script = ExtResource("1_dghmt")
@@ -64,6 +66,9 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2
 [node name="OmniLight3D" type="OmniLight3D" parent="Illumination"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.9370794, 0)
 omni_range = 20.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Illumination"]
+environment = SubResource("Environment_rmwhl")
 
 [node name="WordCube" parent="." instance=ExtResource("2_rjslr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05131817, 0.3914496, -0.6611886)

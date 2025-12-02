@@ -1,13 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://m2v1kfj2ueib"]
+[gd_scene load_steps=18 format=3 uid="uid://m2v1kfj2ueib"]
 
 [ext_resource type="Script" uid="uid://b2lmvupr045pn" path="res://objects/Player/Controls/knm_control.gd" id="1_gndvh"]
+[ext_resource type="PackedScene" uid="uid://cc6ngdqie8o8c" path="res://addons/godot-xr-tools/effects/vignette.tscn" id="2_c6no5"]
 [ext_resource type="Script" uid="uid://daca12k2nffnn" path="res://objects/Player/popup_handler.gd" id="3_3voyg"]
 [ext_resource type="PackedScene" uid="uid://cvdfytue7yk2c" path="res://models/gun/gun.glb" id="3_6vqvp"]
+[ext_resource type="PackedScene" uid="uid://4umy67r6kern" path="res://models/astronaut/left-hand.glb" id="3_637ke"]
 [ext_resource type="Script" uid="uid://bculktcby0jhc" path="res://objects/Player/grab.gd" id="3_f6j3j"]
-[ext_resource type="Texture2D" uid="uid://coslop22ns88a" path="res://imgs/Xbox Series/XboxSeriesX_X.png" id="4_jp6ib"]
+[ext_resource type="PackedScene" uid="uid://d1xxtqcu7rb31" path="res://models/astronaut/astronaut.glb" id="3_l5urc"]
 [ext_resource type="Script" uid="uid://bsdafdoarjd4m" path="res://objects/Player/gun_anim.gd" id="5_fca01"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_gndvh"]
+[ext_resource type="Texture2D" uid="uid://bxj4nhat2thew" path="res://imgs/Oculus Inputs/Oculus_RT.png" id="6_637ke"]
+[ext_resource type="Script" uid="uid://c5o4w7iijoo6b" path="res://objects/Player/grab_ctrl.gd" id="7_b20bf"]
+[ext_resource type="Script" uid="uid://dkhpss0ndqxxq" path="res://objects/Player/collect.gd" id="8_i118q"]
+[ext_resource type="Script" uid="uid://d0l1lpxk5fp8r" path="res://objects/Player/lighting.gd" id="9_vl5w5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6vqvp"]
 radius = 0.52490234
@@ -17,7 +21,15 @@ height = 1.9335938
 radius = 0.25
 height = 1.5
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vl5w5"]
+albedo_color = Color(0.05490196, 1, 1, 1)
+emission_enabled = true
+emission = Color(0.05490196, 1, 1, 1)
+
 [sub_resource type="Curve3D" id="Curve3D_jp6ib"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i118q"]
+height = 1.5336914
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_gndvh")
@@ -33,20 +45,19 @@ unique_name_in_owner = true
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.25, 0)
 near = 0.002
 
+[node name="Vignette" parent="CharacterBody3D/XROrigin/Camera" instance=ExtResource("2_c6no5")]
+radius = 0.6
+fade = 0.1
+auto_fade_out_factor = 3.0
+auto_rotation_limit = 60.0
+auto_velocity_limit = 2.0
+
 [node name="LeftHand" type="XRController3D" parent="CharacterBody3D/XROrigin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5136048, 0)
 tracker = &"left_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/XROrigin/LeftHand"]
-transform = Transform3D(0.101, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_gndvh")
-
-[node name="Area3D" type="Area3D" parent="CharacterBody3D/XROrigin/LeftHand"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/XROrigin/LeftHand/Area3D"]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-shape = SubResource("CapsuleShape3D_6vqvp")
+[node name="Model" parent="CharacterBody3D/XROrigin/LeftHand" instance=ExtResource("3_637ke")]
+transform = Transform3D(0.9402287, -0.34054366, 1.4885636e-08, 0, -4.371139e-08, -1, 0.34054366, 0.9402287, -4.10987e-08, 0, 0, 0)
 
 [node name="RightHand" type="XRController3D" parent="CharacterBody3D/XROrigin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5126994, 0)
@@ -61,6 +72,11 @@ transform = Transform3D(0.99999803, 0, -4.8428774e-08, 0, 0.9999995, 0, 4.842877
 visible = false
 shape = SubResource("CapsuleShape3D_6vqvp")
 
+[node name="astronaut" parent="CharacterBody3D/XROrigin" instance=ExtResource("3_l5urc")]
+
+[node name="Sphere" parent="CharacterBody3D/XROrigin/astronaut" index="0"]
+cast_shadow = 3
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_f6j3j")
@@ -73,12 +89,13 @@ transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 0.24093628, -0.90
 pixel_size = 0.005
 billboard = 1
 no_depth_test = true
-texture = ExtResource("4_jp6ib")
+texture = ExtResource("6_637ke")
 
 [node name="GrabRayCastController" type="Node" parent="."]
 script = ExtResource("3_f6j3j")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="GrabRayCastController"]
+material_override = SubResource("StandardMaterial3D_vl5w5")
 polygon = PackedVector2Array(-0.009877234, 0.0007597893, 0.00025325437, 0.011903332, 0.010383751, 0.00025326308, 0.0007597821, -0.012409858)
 mode = 2
 path_node = NodePath("Path3D")
@@ -112,4 +129,20 @@ transform = Transform3D(0.029890185, 0, 0, 0, 0.027417177, -0.0012377154, 0, 0.0
 [node name="GunPoint" type="Node3D" parent="Hands/GunRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.066031665, 1.1170788, -0.75719714)
 
+[node name="Grab" type="Node" parent="."]
+script = ExtResource("7_b20bf")
+
+[node name="Collection" type="Node3D" parent="."]
+script = ExtResource("8_i118q")
+
+[node name="Area3D" type="Area3D" parent="Collection"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collection/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7668457, 0)
+shape = SubResource("CapsuleShape3D_i118q")
+
+[node name="LightingManipulation" type="Node3D" parent="."]
+script = ExtResource("9_vl5w5")
+
+[editable path="CharacterBody3D/XROrigin/astronaut"]
 [editable path="Hands/GunRoot/gun"]

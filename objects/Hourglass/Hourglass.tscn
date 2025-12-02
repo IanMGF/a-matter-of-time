@@ -6,13 +6,13 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_2e35d"]
 radius = 0.30763194
 
-[node name="Hourglass" type="Node3D"]
+[node name="Hourglass" type="Node3D" groups=["Collectable"]]
 script = ExtResource("1_emt18")
 
 [node name="hourglass" parent="." instance=ExtResource("1_rsbgr")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="CollectionArea" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionArea"]
 shape = SubResource("SphereShape3D_2e35d")

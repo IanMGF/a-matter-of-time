@@ -63,7 +63,7 @@ func _process(_delta: float) -> void:
 		return
 	
 	var point_a: Vector3 = player_node.get_gun_geometric_origin()
-	var point_i1: Vector3 = player_node.get_gun_geometric_origin() + player_node.get_gun_facing() * 0.1 * player_node.interact_range
+	var point_i1: Vector3 = player_node.get_gun_geometric_origin() + player_node.get_gun_facing() * 0.05 * player_node.interact_range
 	var point_e: Vector3 = grabbed_object.global_position
 
 	var point_i2: Vector3 = point_a.lerp(point_i1, 0.6)

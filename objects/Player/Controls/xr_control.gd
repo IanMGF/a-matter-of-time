@@ -2,7 +2,7 @@ extends PlayerControl
 
 @onready var xr_controller_left: XRController3D = $CharacterBody3D/XROrigin/LeftHand
 @onready var xr_controller_right: XRController3D = $CharacterBody3D/XROrigin/RightHand
-@onready var camera: XRCamera3D = $CharacterBody3D/XROrigin/XRCamera3D
+@onready var camera: XRCamera3D = $CharacterBody3D/XROrigin/Camera
 @onready var origin: XROrigin3D = $CharacterBody3D/XROrigin
 @onready var hitbox: CollisionShape3D = $CharacterBody3D/CollisionShape3D
 
@@ -11,7 +11,6 @@ extends PlayerControl
 @export var layer_viewport: SubViewport
 
 @onready var interact_ray_query = PhysicsRayQueryParameters3D.new()
-@onready var composition = $CharacterBody3D/XROrigin/OpenXRCompositionLayerQuad
 
 var controller_position: Vector2
 
@@ -68,12 +67,11 @@ func right_controller_button_pressed(btn_name: String) -> void:
 		self.attempt_grab()
 
 func _ready() -> void:
-
 	var gun = $Hands/GunRoot
 	gun.reparent(xr_controller_right)
 	gun.position = Vector3.ZERO
 
-	composition.layer_viewport = layer_viewport
+	#composition.layer_viewport = layer_viewport
 	xr_controller_left.input_vector2_changed.connect(input_controller_movement)
 	xr_controller_left.button_pressed.connect(left_controller_button_pressed)
 
@@ -82,12 +80,12 @@ func _ready() -> void:
 
 	character_body.velocity = Vector3.ZERO
 
-	var left_hand_mesh = $CharacterBody3D/XROrigin/LeftHand/MeshInstance3D
+	var left_hand_mesh = $CharacterBody3D/XROrigin/LeftHand/Model
 	var right_hand_mesh = $CharacterBody3D/XROrigin/RightHand/GunRoot
 
 	var hands_scale_scalar = origin.world_scale * 0.1
 	var hands_scale_vector = Vector3(hands_scale_scalar, hands_scale_scalar, hands_scale_scalar)
-	left_hand_mesh.scale = hands_scale_vector
+	#left_hand_mesh.scale = hands_scale_vector
 	right_hand_mesh.scale = hands_scale_vector
 
 func get_gun_facing() -> Vector3:
@@ -113,4 +111,4 @@ func get_movement_direction() -> Vector2:
 	return Vector2(unitary.x, -unitary.y)
 
 func get_speed() -> float:
-	return 15 * origin.world_scale
+	return 50 * origin.world_scale

@@ -12,7 +12,12 @@ func _ready():
 	interact_range = player.interact_range
 
 func _process(_delta: float) -> void:
+	if player.get_node("Grab").is_holding:
+		popup.visible = false
+		return
+	
 	camera = player.get_camera()
+	player.get_node("CharacterBody3D/XROrigin/astronaut").global_rotation.y = camera.global_rotation.y
 	var origin_point = camera.global_position
 	var normal = player.get_gun_facing()
 
@@ -28,6 +33,10 @@ func _process(_delta: float) -> void:
 		popup.visible = false
 		return
 	
+	if !result.collider.is_in_group("Grabbable"):
+		popup.visible = false
+		return
+		
 	raycast.from = origin_point
 	raycast.to = result.collider.global_position
 	raycast.collide_with_bodies = true
