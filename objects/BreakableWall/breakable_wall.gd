@@ -8,3 +8,6 @@ func _ready() -> void:
 func break_wall(obj: Node3D):
 	if obj == self:
 		self.queue_free()
+		broken.emit()
+
+signal broken()

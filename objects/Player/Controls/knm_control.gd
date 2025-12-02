@@ -1,16 +1,17 @@
 extends PlayerControl
 
-@onready var camera: Camera3D = $CharacterBody3D/XROrigin/XRCamera3D
+@onready var camera: Camera3D = $CharacterBody3D/XROrigin/Camera
 @onready var gun: Node3D = $Hands/GunRoot
 
-const SENSITIVITY = 0.0025
+const SENSITIVITY = 2.5e-3
 const VIEW_EPSILON = 0
 
 const MAX_PITCH = PI/2 - VIEW_EPSILON
 
 func _ready() -> void:
 	gun.reparent(camera)
-	gun.position = Vector3(0.088, -0.138, -0.132)
+	gun.position = Vector3(0.125, -0.138, -0.112)
+	gun.rotation = Vector3(0, -0.4, 0)
 	$CharacterBody3D/XROrigin/LeftHand.queue_free()
 	$CharacterBody3D/XROrigin/RightHand.queue_free()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://cc00xdp6qhtun"]
+
+[ext_resource type="PackedScene" uid="uid://c04j1g4ol567c" path="res://objects/Door/Door.tscn" id="1_g1dg4"]
+[ext_resource type="PackedScene" uid="uid://bd8nhihypihy" path="res://objects/Button/Button.tscn" id="2_s1bpp"]
+[ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player/Player.tscn" id="3_76ugp"]
+[ext_resource type="PackedScene" uid="uid://drsvlmie7dumn" path="res://objects/BreakableWall/BreakableWall.tscn" id="3_s1bpp"]
+[ext_resource type="PackedScene" uid="uid://dyitnhqobxy0o" path="res://objects/Hourglass/Hourglass.tscn" id="4_e8p81"]
+[ext_resource type="PackedScene" uid="uid://dejcckcindmi" path="res://objects/TimeMachine/TimeMachine.tscn" id="5_55gdq"]
+[ext_resource type="PackedScene" uid="uid://cloobna8uaexa" path="res://objects/WordCube/WordCube.tscn" id="7_76ugp"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Strucutre" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="FloorA" type="CSGBox3D" parent="Strucutre"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4721193, -0.5, 2)
+size = Vector3(22, 1, 14)
+
+[node name="OuterWalls" type="CSGCombiner3D" parent="Strucutre"]
+
+[node name="WallB" type="CSGBox3D" parent="Strucutre/OuterWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45269775, 1.5, -4.5)
+size = Vector3(14.0946045, 3, 1)
+
+[node name="WallD" type="CSGBox3D" parent="Strucutre/OuterWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1.5, 2)
+size = Vector3(1, 3, 14)
+
+[node name="WallE" type="CSGBox3D" parent="Strucutre/OuterWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1.5, -2.5)
+size = Vector3(8, 3, 1)
+
+[node name="WallB2" type="CSGBox3D" parent="Strucutre/OuterWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 1.5, 8.5)
+size = Vector3(22, 3, 1)
+
+[node name="WallD2" type="CSGBox3D" parent="Strucutre/OuterWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 1.5, 3)
+size = Vector3(1, 3, 12)
+
+[node name="InnerWalls" type="CSGCombiner3D" parent="Strucutre"]
+
+[node name="WallA" type="CSGBox3D" parent="Strucutre/InnerWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6229248, 1.5, 4.5)
+size = Vector3(10, 3, 1)
+
+[node name="WallC" type="CSGBox3D" parent="Strucutre/InnerWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.506874, 1.5, 0)
+size = Vector3(0.23268127, 3, 10)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Strucutre/InnerWalls/WallC"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.0100572, 0.025451034)
+operation = 2
+radius = 1.0380859
+height = 0.24609375
+sides = 16
+
+[node name="WallC2" type="CSGBox3D" parent="Strucutre/InnerWalls"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.750935, 1.5, 4.882955)
+size = Vector3(0.23268127, 3, 7.885742)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Strucutre/InnerWalls/WallC2"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.0100572, 0.025451034)
+operation = 2
+calculate_tangents = false
+radius = 1.0380859
+height = 0.24609375
+sides = 16
+
+[node name="Door" parent="." instance=ExtResource("1_g1dg4")]
+transform = Transform3D(-2.8630959e-08, 0, 0.655, 0, 0.655, 0, -0.655, 0, -2.8630959e-08, 6.5110564, 0, 0.0432311)
+
+[node name="Button" parent="." instance=ExtResource("2_s1bpp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.209856, 0, 1.5703859)
+
+[node name="BreakableWallA" parent="." instance=ExtResource("3_s1bpp")]
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 6.9811196, 1.2419655, 6.761)
+
+[node name="BreakableWallB" parent="." instance=ExtResource("3_s1bpp")]
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, -0.15633583, 1.2419655, 6.761)
+
+[node name="BreakableWallC" parent="." instance=ExtResource("3_s1bpp")]
+transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, -5.109579, 1.246367, 4.3719735)
+
+[node name="Player" parent="." instance=ExtResource("3_76ugp")]
+transform = Transform3D(-0.2622397, 0, -0.9650028, 0, 1, 0, 0.9650028, 0, -0.2622397, -2.8698957, 0, -2.1167483)
+interact_range = 1.5
+
+[node name="Perspective" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Perspective"]
+transform = Transform3D(0.95021594, -0.20039602, 0.23860256, 0.0091995895, 0.78346163, 0.62137216, -0.31145644, -0.58824265, 0.74630123, -0.065329194, 4.7984195, 0.6480267)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Perspective"]
+transform = Transform3D(0.1517094, -0.69227934, -0.7055024, 0, -0.71376413, 0.7003862, -0.98842514, -0.106255166, -0.10828472, -0.077980995, 4.7677464, 0.6669822)
+
+[node name="Hourglass" parent="." instance=ExtResource("4_e8p81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9654922, 0.7729229, -0.1605506)
+
+[node name="TimeMachine" parent="." instance=ExtResource("5_55gdq")]
+transform = Transform3D(-0.44162688, 0, -0.5236322, 0, 0.685, 0, 0.5236322, 0, -0.44162688, -5.4581547, 4.7683716e-07, -3.0307827)
+
+[node name="Door2" parent="." instance=ExtResource("1_g1dg4")]
+transform = Transform3D(0.6549999, 0, 5.9604645e-08, 0, 0.6549999, 0, -5.9604645e-08, 0, 0.6549999, 9.80001, -2.3841858e-07, 4.887667)
+
+[node name="WordCube" parent="." instance=ExtResource("7_76ugp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.219369, 1.8516692, 1.7059479)
+
+[connection signal="pressed" from="Button" to="Door" method="open_door"]
+[connection signal="pressed" from="Button" to="Door2" method="close_door"]
+[connection signal="released" from="Button" to="Door" method="close_door"]
+[connection signal="released" from="Button" to="Door2" method="open_door"]
