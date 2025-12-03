@@ -1,22 +1,98 @@
-[gd_scene load_steps=4 format=3 uid="uid://by701slf6o4l8"]
+[gd_scene load_steps=11 format=3 uid="uid://by701slf6o4l8"]
 
+[ext_resource type="Texture2D" uid="uid://cbvb4tbowxr83" path="res://levels/Level Demo/level_model_parede-512.png" id="1_bqxhe"]
 [ext_resource type="PackedScene" uid="uid://iy1xk4pxhgv5" path="res://objects/Box/Box.tscn" id="1_e0l68"]
 [ext_resource type="PackedScene" uid="uid://c04j1g4ol567c" path="res://objects/Door/Door.tscn" id="2_bqxhe"]
 [ext_resource type="PackedScene" uid="uid://bd8nhihypihy" path="res://objects/Button/Button.tscn" id="3_jfr65"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jfr65"]
+resource_name = "Walls"
+cull_mode = 2
+albedo_texture = ExtResource("1_bqxhe")
+metallic = 0.4
+metallic_texture_channel = 2
+roughness = 0.8
+roughness_texture_channel = 1
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0352647
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_meplb"]
+resource_name = "Walls"
+cull_mode = 2
+albedo_texture = ExtResource("1_bqxhe")
+metallic = 0.4
+metallic_texture_channel = 2
+roughness = 0.8
+roughness_texture_channel = 1
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0352647
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0guoy"]
+resource_name = "Walls"
+cull_mode = 2
+albedo_texture = ExtResource("1_bqxhe")
+metallic = 0.4
+metallic_texture_channel = 2
+roughness = 0.8
+roughness_texture_channel = 1
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0352647
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60tmf"]
+resource_name = "Walls"
+cull_mode = 2
+albedo_texture = ExtResource("1_bqxhe")
+metallic = 0.4
+metallic_texture_channel = 2
+roughness = 0.8
+roughness_texture_channel = 1
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0352647
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqnl7"]
+resource_name = "Walls"
+cull_mode = 2
+albedo_texture = ExtResource("1_bqxhe")
+metallic = 0.4
+metallic_texture_channel = 2
+roughness = 0.8
+roughness_texture_channel = 1
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0352647
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kykmu"]
+resource_name = "Walls"
+cull_mode = 2
+albedo_texture = ExtResource("1_bqxhe")
+metallic = 0.4
+metallic_texture_channel = 2
+roughness = 0.8
+roughness_texture_channel = 1
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0352647
 
 [node name="Room1" type="CSGCombiner3D"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
 size = Vector3(12, 1, 11)
+material = SubResource("StandardMaterial3D_jfr65")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6, 1.5, -0.5)
 size = Vector3(11, 5, 1)
+material = SubResource("StandardMaterial3D_meplb")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5)
 size = Vector3(12, 5, 1)
+material = SubResource("StandardMaterial3D_0guoy")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -0.5)
@@ -25,14 +101,17 @@ size = Vector3(12, 1, 11)
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6, 1.5, -0.5)
 size = Vector3(11, 5, 1)
+material = SubResource("StandardMaterial3D_60tmf")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 1.5, -1)
 size = Vector3(7, 5, 1)
+material = SubResource("StandardMaterial3D_oqnl7")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.6709595)
 size = Vector3(12, 5, 0.34191895)
+material = SubResource("StandardMaterial3D_kykmu")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D7"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.18335116, -0.7838495, 0)

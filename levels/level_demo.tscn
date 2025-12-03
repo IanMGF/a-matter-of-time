@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2aqewng6ppcq"]
+[gd_scene load_steps=8 format=3 uid="uid://co5vpegsmfa73"]
 
 [ext_resource type="PackedScene" uid="uid://m2v1kfj2ueib" path="res://objects/Player/Player.tscn" id="1_4af5r"]
 [ext_resource type="PackedScene" uid="uid://by701slf6o4l8" path="res://levels/Level Demo/LevelObjs/Room1.tscn" id="2_lah05"]
@@ -11,7 +11,7 @@
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_4af5r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0359688, -2.3841858e-07, 3.0384789)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.036, 0, 3.038)
 
 [node name="Level Structure" type="Node3D" parent="."]
 

@@ -1,8 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6x1bbwwuodcn"]
+[gd_scene load_steps=11 format=3 uid="uid://c6x1bbwwuodcn"]
 
 [ext_resource type="Script" uid="uid://dnvpw2k8awwrx" path="res://levels/Level Demo/LevelObjs/room_5.gd" id="1_mx8n6"]
 [ext_resource type="PackedScene" uid="uid://d1xxtqcu7rb31" path="res://models/astronaut/astronaut.glb" id="2_d1y17"]
+[ext_resource type="Texture2D" uid="uid://cbvb4tbowxr83" path="res://levels/Level Demo/level_model_parede-512.png" id="2_ybkxn"]
 [ext_resource type="PackedScene" uid="uid://dyitnhqobxy0o" path="res://objects/Hourglass/Hourglass.tscn" id="3_d1y17"]
+[ext_resource type="Texture2D" uid="uid://c8afuk6thqb3o" path="res://levels/Level Demo/level_model_parede_1.png" id="3_dka6s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_83mxh"]
+resource_name = "Walls"
+cull_mode = 2
+albedo_texture = ExtResource("2_ybkxn")
+metallic = 0.4
+metallic_texture_channel = 2
+roughness = 0.8
+roughness_texture_channel = 1
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0352647
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aiysp"]
+resource_name = "Walls"
+cull_mode = 2
+albedo_texture = ExtResource("2_ybkxn")
+metallic_texture = ExtResource("3_dka6s")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_dka6s")
+roughness_texture_channel = 1
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_db0ep"]
 size = Vector3(0.44555664, 4, 4.5185547)
@@ -10,16 +35,25 @@ size = Vector3(0.44555664, 4, 4.5185547)
 [sub_resource type="BoxShape3D" id="BoxShape3D_j4wn5"]
 size = Vector3(25.152328, 4.314575, 7.651825)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1y17"]
+transparency = 1
+blend_mode = 2
+depth_draw_mode = 1
+albedo_color = Color(0.8239884, 0.81138813, 0.99999934, 1)
+roughness = 0.1
+
 [node name="Room5" type="CSGCombiner3D"]
 script = ExtResource("1_mx8n6")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -0.5)
 size = Vector3(6, 1, 11)
+material = SubResource("StandardMaterial3D_83mxh")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3, 1.5, -0.86206055)
 size = Vector3(10.275879, 5, 1)
+material = SubResource("StandardMaterial3D_83mxh")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -0.5)
@@ -28,10 +62,12 @@ size = Vector3(6, 1, 11)
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3, 1.5, 1.2825317)
 size = Vector3(6, 5, 1)
+material = SubResource("StandardMaterial3D_aiysp")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -5.6709595)
 size = Vector3(6, 5, 0.34191895)
+material = SubResource("StandardMaterial3D_83mxh")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0146995, 2.909513, -3.3150444)
@@ -41,10 +77,12 @@ omni_range = 16.09226
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -0.5, -0.5)
 size = Vector3(6, 1, 11)
+material = SubResource("StandardMaterial3D_83mxh")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, 1.5, -0.86206055)
 size = Vector3(10.275879, 5, 1)
+material = SubResource("StandardMaterial3D_83mxh")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3.5, -0.5)
@@ -53,6 +91,7 @@ size = Vector3(6, 1, 11)
 [node name="CSGBox3D9" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.5, -5.6709595)
 size = Vector3(6, 5, 0.34191895)
+material = SubResource("StandardMaterial3D_83mxh")
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.015, 2.91, -3.315)
@@ -78,3 +117,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 2)
 
 [node name="Hourglass" parent="." instance=ExtResource("3_d1y17")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01659298, 0.9999999, 3.0623784)
+
+[node name="Mirror" type="CSGBox3D" parent="."]
+transform = Transform3D(1.6378526e-07, 0, -1, 0, 1, 0, 1.24899, 0, 1.3113416e-07, -3, 1.5750756, -3.5804129)
+size = Vector3(2.9700313, 3.1241455, 1)
+material = SubResource("StandardMaterial3D_d1y17")

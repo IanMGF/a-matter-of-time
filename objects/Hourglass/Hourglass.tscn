@@ -12,7 +12,15 @@ script = ExtResource("1_emt18")
 [node name="hourglass" parent="." instance=ExtResource("1_rsbgr")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
+[node name="Cube" parent="hourglass" index="0"]
+transform = Transform3D(0.9979514, 0.05368198, 0.034803953, -0.049979173, 0.9937607, -0.09970866, -0.03993936, 0.097764924, 0.99440783, 0, -0.0015, 0)
+
+[node name="AnimationPlayer" parent="hourglass" index="1"]
+autoplay = "CubeAction"
+
 [node name="CollectionArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectionArea"]
 shape = SubResource("SphereShape3D_2e35d")
+
+[editable path="hourglass"]

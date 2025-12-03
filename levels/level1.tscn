@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0chvnwqypc5w"]
+[gd_scene load_steps=9 format=3 uid="uid://3ypir1c1prue"]
 
 [ext_resource type="PackedScene" uid="uid://dejcckcindmi" path="res://objects/TimeMachine/TimeMachine.tscn" id="1_61w3m"]
 [ext_resource type="PackedScene" uid="uid://c04j1g4ol567c" path="res://objects/Door/Door.tscn" id="1_b3oru"]
@@ -33,6 +33,9 @@ transform = Transform3D(-0.44162688, 0, -0.5236322, 0, 0.685, 0, 0.5236322, 0, -
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9174166, 0.29358643, -2.3071728)
 
 [node name="Model" parent="." instance=ExtResource("7_8hd6v")]
+
+[node name="Plane_001" parent="Model" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.008016348, -0.9999679, 0, 0.9999679, -0.008016348, -0.10645552, 1.5885105, -4.0120897)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Model/Plane_001" index="0"]
 
